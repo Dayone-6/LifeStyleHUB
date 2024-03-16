@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_nav_home">Главная</string>
+    <string name="title_nav_my_activity">Мой Досуг</string>
+    <string name="title_nav_account">Профиль</string>
+</resources>
