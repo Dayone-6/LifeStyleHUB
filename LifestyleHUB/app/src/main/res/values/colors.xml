@@ -13,4 +13,7 @@
     <color name="navViewBackground">#EFEFEF</color>
     <color name="onBackgroundText">@color/black</color>
     <color name="onSurfaceText">@color/backgroundMain</color>
+    <color name="btnText">@color/white</color>
+    <color name="grayText">#888888</color>
+
 </resources>

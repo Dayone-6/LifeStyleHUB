@@ -12,7 +12,7 @@
         android:title="@string/title_nav_my_activity" />
 
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/navigation_account_info"
         android:icon="@drawable/ic_person"
         android:title="@string/title_nav_account" />
 
