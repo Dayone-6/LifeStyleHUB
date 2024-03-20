@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundMain"
+    android:background="@color/background_main"
     android:orientation="vertical"
     tools:context=".ui.account.registration.RegistrationFragment">
 
@@ -23,7 +23,7 @@
             android:fontFamily="@font/inter_bold"
             android:text="@string/title_registration"
             android:textAlignment="center"
-            android:textColor="@color/onBackgroundText"
+            android:textColor="@color/on_background_text"
             android:textSize="@dimen/title_text_size" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -136,7 +136,7 @@
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/inter_regular"
             android:text="@string/text_marked_notice"
-            android:textColor="@color/grayText"
+            android:textColor="@color/gray_text"
             android:textSize="12sp" />
 
         <Button
@@ -153,7 +153,7 @@
             android:paddingRight="70dp"
             android:paddingBottom="10dp"
             android:text="@string/text_registrate"
-            android:textColor="@color/btnText"
+            android:textColor="@color/btn_text"
             app:cornerRadius="@dimen/btn_corner_radius" />
     </LinearLayout>
 

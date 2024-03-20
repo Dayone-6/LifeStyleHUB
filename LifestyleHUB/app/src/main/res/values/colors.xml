@@ -9,11 +9,14 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary">#3D5AFE</color>
-    <color name="backgroundMain">@color/white</color>
-    <color name="navViewBackground">#EFEFEF</color>
-    <color name="onBackgroundText">@color/black</color>
-    <color name="onSurfaceText">@color/backgroundMain</color>
-    <color name="btnText">@color/white</color>
-    <color name="grayText">#888888</color>
+    <color name="background_main">@color/white</color>
+    <color name="nav_view_background">#EFEFEF</color>
+    <color name="on_background_text">@color/black</color>
+    <color name="on_surface_text">@color/background_main</color>
+    <color name="btn_text">@color/white</color>
+    <color name="gray_text">#888888</color>
+    <color name="skeleton_shimmer">#cccccc</color>
+    <color name="skeleton_color">#777777</color>
+    <color name="surface_background">#bbbbbb</color>
 
 </resources>

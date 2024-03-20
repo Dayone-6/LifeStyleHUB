@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundMain"
+    android:background="@color/background_main"
     tools:context=".ui.my_activity.MyActivityFragment">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textColor="@color/onBackgroundText"
+        android:textColor="@color/on_background_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

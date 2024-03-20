@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundMain"
+    android:background="@color/background_main"
     tools:context=".ui.account.account_info.AccountInfoFragment">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:fontFamily="@font/inter_bold"
             android:text="@string/title_account_info"
             android:textAlignment="center"
-            android:textColor="@color/onBackgroundText"
+            android:textColor="@color/on_background_text"
             android:textSize="@dimen/title_text_size" />
 
         <LinearLayout
@@ -38,7 +38,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_account_login"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_not_stated"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -64,7 +64,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_name"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_not_stated"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_surname"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
 
                 <TextView
@@ -100,7 +100,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_not_stated"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -116,7 +116,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/hint_email"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
 
                 <TextView
@@ -126,7 +126,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/text_not_stated"
-                    android:textColor="@color/onBackgroundText"
+                    android:textColor="@color/on_background_text"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>

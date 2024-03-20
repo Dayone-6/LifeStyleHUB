@@ -13,6 +13,7 @@ object AppPrefs {
 
     private var authorizedUserLogin: String = ""
 
+    private var isLocationPermissionGranted: Boolean = false
 
     fun initPrefs(context: Context, name: String){
         prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE)
@@ -39,5 +40,11 @@ object AppPrefs {
         editor.putString(Constants.AUTH_USER_KEY, login)
         editor.commit()
     }
+
+    fun setIsLocationPermissionGranted(isGranted: Boolean){
+        isLocationPermissionGranted = isGranted
+    }
+
+    fun getIsLocationPermissionGranted() = isLocationPermissionGranted
 
 }

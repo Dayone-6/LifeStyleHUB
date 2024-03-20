@@ -33,4 +33,5 @@
     <string name="message_failed">Something went wrong!</string>
     <string name="message_get_random_user_failed">Get random user data failed!</string>
     <string name="message_get_user_failed">Get user data failed!</string>
+    <string name="message_get_location_failed">Get location failed</string>
 </resources>

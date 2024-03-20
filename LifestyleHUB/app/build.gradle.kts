@@ -1,3 +1,6 @@
+import com.android.build.gradle.tasks.reportErrors
+import org.jetbrains.kotlin.fir.declarations.builder.buildScript
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -37,7 +40,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
+
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -63,5 +68,8 @@ dependencies {
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
+
+    //Skeleton
+    implementation (libs.skeletonlayout)
 
 }

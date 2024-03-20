@@ -1,5 +1,6 @@
 package ru.dayone.lifestylehub.utils
 
 enum class SuccessCode {
-    DEFAULT
+    DEFAULT,
+    GET_WEATHER_SUCCEED
 }

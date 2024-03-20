@@ -28,4 +28,5 @@
     <string name="text_account_login">Логин</string>
     <string name="text_not_stated">Не указано</string>
     <string name="message_get_user_failed">Ошибка получения информации о пользователе</string>
+    <string name="message_get_location_failed">Ошибка получения локации</string>
 </resources>
