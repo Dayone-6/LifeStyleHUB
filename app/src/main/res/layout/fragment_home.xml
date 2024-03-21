@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_main"
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ru.dayone.lifestylehub.widget.Weather
+                android:id="@+id/view_weather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ru.dayone.lifestylehub.widget.Weather>
+
+            <TextView
+                android:id="@+id/tv_weather_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="30dp"
+                android:background="@drawable/shape_rounded_corners"
+                android:backgroundTint="@color/surface_background"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/text_weather_available_with_account"
+                android:textColor="@color/on_background_text"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_places"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

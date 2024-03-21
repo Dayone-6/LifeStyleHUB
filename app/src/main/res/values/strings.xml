@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name" translatable="false">LifestyleHUB</string>
+
+    <string name="title_nav_home">Home</string>
+    <string name="title_nav_my_activity">My Activity</string>
+    <string name="title_nav_account">Account</string>
+    <string name="title_registration">Registration</string>
+    <string name="title_login">Authorization</string>
+    <string name="title_account_info">Account Info</string>
+
+    <string name="hint_login">Login*</string>
+    <string name="hint_password">Password*</string>
+    <string name="hint_name">Name*</string>
+    <string name="hint_surname">Surname*</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_email">Email</string>
+
+    <string name="text_registrate">Registrate</string>
+    <string name="text_login">Authorize</string>
+    <string name="text_account_login">Login</string>
+    <string name="text_marked_notice">* Marked fields must not be empty</string>
+    <string name="text_didnt_have_account">Didn\'t have an account yet?</string>
+    <string name="text_name">Name</string>
+    <string name="text_surname">Surname</string>
+    <string name="text_not_stated">Not stated</string>
+    <string name="text_access_location">Location permission denied</string>
+    <string name="text_enable_location">Location unavailable\nturn on the gps or the network</string>
+    <string name="text_weather_available_with_account">Log in to an account\nto see the weather</string>
+
+    <string name="error_empty_field">This field must not be empty</string>
+    <string name="error_login_already_exists">This login already exists! Choose another one</string>
+    <string name="error_login_not_exists">Login not exists, you can registrate</string>
+    <string name="error_bad_password">Wrong password!</string>
+
+    <string name="message_failed">Something went wrong!</string>
+    <string name="message_get_random_user_failed">Get random user data failed!</string>
+    <string name="message_get_user_failed">Get user data failed!</string>
+    <string name="message_get_location_failed">Get location failed</string>
+</resources>
