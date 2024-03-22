@@ -16,6 +16,7 @@
     <string name="text_marked_notice">* Помеченные поля должны быть заполнены</string>
     <string name="text_access_location">Доступ к локации отклонен</string>
     <string name="text_weather_available_with_account">Войдите в аккаунт,\nчтобы видеть погоду</string>
+    <string name="text_there_is_no_places">Поблизости нет мест</string>
     <string name="error_empty_field">Это поле должно быть заполнено</string>
     <string name="message_failed">Что-то пошло не так!</string>
     <string name="error_login_already_exists">Этот логин уже занят! Выберите другой</string>
@@ -31,4 +32,6 @@
     <string name="message_get_user_failed">Ошибка получения информации о пользователе</string>
     <string name="message_get_location_failed">Ошибка получения локации</string>
     <string name="text_enable_location">Локация недоступна включите GPS или интернет</string>
+    <string name="text_paging_load">Загрузить больше данных</string>
+    <string name="text_paging_end">Это все</string>
 </resources>

@@ -1,5 +1,4 @@
-import com.android.build.gradle.tasks.reportErrors
-import org.jetbrains.kotlin.fir.declarations.builder.buildScript
+
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -71,5 +70,8 @@ dependencies {
 
     //Skeleton
     implementation (libs.skeletonlayout)
+
+    //Glide
+    implementation (libs.glide)
 
 }

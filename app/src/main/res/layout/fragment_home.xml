@@ -45,7 +45,19 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_places"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_place" />
+
+        <TextView
+            android:id="@+id/tv_places_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/on_background_text"
+            android:textSize="@dimen/title_text_size"
+            android:visibility="gone" />
     </LinearLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

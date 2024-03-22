@@ -10,6 +10,7 @@ import com.faltenreich.skeletonlayout.SkeletonConfig
 import com.faltenreich.skeletonlayout.createSkeleton
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.databinding.WidgetWeatherBinding
+import ru.dayone.lifestylehub.prefs.AppPrefs
 
 class Weather(context: Context, attr: AttributeSet) : LinearLayout(context, attr) {
     private var _binding: WidgetWeatherBinding? = null
@@ -25,16 +26,7 @@ class Weather(context: Context, attr: AttributeSet) : LinearLayout(context, attr
     init {
         _binding = WidgetWeatherBinding.inflate(LayoutInflater.from(context), this, false)
 
-        val defaultSkeletonConfig = SkeletonConfig.default(context)
-        val skeletonConfig = SkeletonConfig(
-            context.getColor(R.color.skeleton_color),
-            defaultSkeletonConfig.maskCornerRadius,
-            defaultSkeletonConfig.showShimmer,
-            context.getColor(R.color.skeleton_shimmer),
-            1200L,
-            defaultSkeletonConfig.shimmerDirection,
-            defaultSkeletonConfig.shimmerAngle
-        )
+        val skeletonConfig = AppPrefs.getSkeletonConfig()
         ivWeatherSkeleton = binding.ivWeatherIcon.createSkeleton(skeletonConfig)
         tvTempSkeleton = binding.tvWeatherTemp.createSkeleton(skeletonConfig)
         tvTempRangeSkeleton = binding.tvWeatherFromTo.createSkeleton(skeletonConfig)

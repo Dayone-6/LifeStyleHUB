@@ -18,5 +18,7 @@
     <color name="skeleton_shimmer">#cccccc</color>
     <color name="skeleton_color">#777777</color>
     <color name="surface_background">#bbbbbb</color>
+    <color name="surface_light_background">#dddddd</color>
+
 
 </resources>

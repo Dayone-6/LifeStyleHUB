@@ -16,11 +16,13 @@ import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import ru.dayone.lifestylehub.R
+import ru.dayone.lifestylehub.api.places.model.PlacesResponseModel
 import ru.dayone.lifestylehub.api.weather.model.WeatherModel
+import ru.dayone.lifestylehub.model.FormattedPlaceModel
 import ru.dayone.lifestylehub.prefs.AppPrefs
 import ru.dayone.lifestylehub.utils.FailureCode
 import ru.dayone.lifestylehub.utils.LocationStatus
+import ru.dayone.lifestylehub.utils.PlacesStatus
 import ru.dayone.lifestylehub.utils.WeatherStatus
 import java.util.Locale
 
@@ -33,9 +35,15 @@ class HomeViewModel(
     private val _locationStatus: MutableLiveData<LocationStatus> = MutableLiveData()
     val locationStatus: LiveData<LocationStatus> = _locationStatus
 
+    private val _placesStatus: MutableLiveData<PlacesStatus> = MutableLiveData()
+    val placesStatus: LiveData<PlacesStatus> = _placesStatus
+
     private val weatherRepository = WeatherRepository()
+    private val placesRepository = PlacesRepository()
+
     private val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     private val geocoder = Geocoder(context, Locale.getDefault())
+
 
     fun getWeather(apiKey: String, lat: Double, lon: Double, lang: String){
         weatherRepository.getWeatherCall(apiKey, lon, lat, lang).enqueue(object : Callback<WeatherModel>{
@@ -56,10 +64,7 @@ class HomeViewModel(
 
     @SuppressLint("MissingPermission")
     fun getLocation(){
-        if(!AppPrefs.getIsAuthorized()){
-            _locationStatus.value = LocationStatus.Failure(FailureCode.USER_NOT_AUTHORIZED)
-            return
-        }else if(!AppPrefs.getIsLocationPermissionGranted()){
+        if(!AppPrefs.getIsLocationPermissionGranted()){
             _locationStatus.value = LocationStatus.Failure(FailureCode.GET_LOCATION_PERMISSION_DENIED)
             return
         }
@@ -97,6 +102,45 @@ class HomeViewModel(
             }catch (e: Exception){
                 _locationStatus.postValue(LocationStatus.Failure(FailureCode.DEFAULT))
             }
+        }
+    }
+
+    fun getPlaces(token: String, ll: String, date: String, limit: Int, offset: Int){
+        try {
+            placesRepository.getPlacesCall(token, ll, date, limit, offset).enqueue(object : Callback<PlacesResponseModel>{
+                override fun onResponse(
+                    call: Call<PlacesResponseModel>,
+                    response: Response<PlacesResponseModel>
+                ) {
+                        Log.d("Data", response.body().toString())
+                        val formattedPlaces = ArrayList<FormattedPlaceModel>()
+                        for(result in response.body()!!.response.group.results){
+                            try {
+                                Log.d("Data", result.place.location.fullAddress.toString())
+                                formattedPlaces.add(
+                                    FormattedPlaceModel(
+                                        id = result.place.id,
+                                        name = result.place.name,
+                                        address = result.place.location.fullAddress.joinToString(),
+                                        categories = result.place.categories.map { it.name },
+                                        photoUrl = result.photo.urlPrefix + "1000x400/" + result.photo.urlSuffix.substring(1),
+                                        allCount = response.body()!!.response.group.totalCount
+                                    )
+                                )
+                            }catch (e: Exception){
+                                e.printStackTrace()
+                            }
+                        }
+                        _placesStatus.postValue(PlacesStatus.Succeed(formattedPlaces))
+                }
+
+                override fun onFailure(call: Call<PlacesResponseModel>, t: Throwable) {
+                    _placesStatus.postValue(PlacesStatus.Failed(FailureCode.GET_PLACES_FAILED))
+                }
+            })
+        }catch (e: Exception){
+            e.printStackTrace()
+            _placesStatus.postValue(PlacesStatus.Failed(FailureCode.DEFAULT))
         }
     }
 }

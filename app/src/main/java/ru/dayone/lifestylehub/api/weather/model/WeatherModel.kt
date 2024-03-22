@@ -1,7 +1,6 @@
 package ru.dayone.lifestylehub.api.weather.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.TimeZone
 
 data class WeatherModel (
     @SerializedName("coord") val coords: CoordPair,
@@ -13,7 +12,7 @@ data class WeatherModel (
     @SerializedName("rain") val rain: Rain,
     @SerializedName("clouds") val clouds: Clouds,
     @SerializedName("dt") val dayTime: Int,
-    @SerializedName("sys") val placeData: PlaceData,
+    @SerializedName("sys") val locationData: LocationData,
     @SerializedName("timezone") val timeZone: Int,
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
