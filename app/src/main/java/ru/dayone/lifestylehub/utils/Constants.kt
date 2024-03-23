@@ -13,4 +13,16 @@ const val WEATHER_API_BASE_URL = "https://api.openweathermap.org/data/2.5/"
 const val PLACES_OAUTH_KEY = "CIMDSQKBU1XKL3GBOYWKA5Y4O2V0THCWAS0PF0EWRV42MIYK"
 const val PLACES_API_BASE_URL = "https://api.foursquare.com/v2/search/"
 
+const val PHOTOS_API_KEY = "fsq3G36AN+xG0TIEhgg41jPzfKZONi0YT20sDO38aKNnpL0="
+
+const val DATE_KEY = "20240323"
+
+const val PLACES_DETAILS_BASE_URL = "https://api.foursquare.com/"
+
+// 2 hours in millis
+const val CACHE_RELEVANCE_TIME = 2 * 60 * 60 * 1000
+
 const val LOCATION_PERMISSION_REQUEST_CODE = 123
+const val PAGINATION_LIMIT = 15
+
+const val MAIN_DELIMITER = "|||"

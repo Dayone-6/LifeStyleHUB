@@ -14,7 +14,7 @@ import ru.dayone.lifestylehub.account.login.LoginViewModelFactory
 import ru.dayone.lifestylehub.databinding.FragmentLoginBinding
 import ru.dayone.lifestylehub.account.utils.AccountFailureCode
 import ru.dayone.lifestylehub.account.utils.AccountStatus
-import ru.dayone.lifestylehub.prefs.AppPrefs
+import ru.dayone.lifestylehub.data.local.AppPrefs
 
 class LoginFragment : Fragment() {
 

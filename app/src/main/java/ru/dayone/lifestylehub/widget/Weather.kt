@@ -4,13 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.cardview.widget.CardView
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.SkeletonConfig
 import com.faltenreich.skeletonlayout.createSkeleton
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.databinding.WidgetWeatherBinding
-import ru.dayone.lifestylehub.prefs.AppPrefs
+import ru.dayone.lifestylehub.data.local.AppPrefs
 
 class Weather(context: Context, attr: AttributeSet) : LinearLayout(context, attr) {
     private var _binding: WidgetWeatherBinding? = null

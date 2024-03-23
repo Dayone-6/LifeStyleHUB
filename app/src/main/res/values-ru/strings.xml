@@ -34,4 +34,8 @@
     <string name="text_enable_location">Локация недоступна включите GPS или интернет</string>
     <string name="text_paging_load">Загрузить больше данных</string>
     <string name="text_paging_end">Это все</string>
+    <string name="text_like_people">Стольким людям понравилось это место</string>
+    <string name="text_contacts">Контакты</string>
+    <string name="text_url">Ссылка</string>
+    <string name="text_phone">Номер телефона</string>
 </resources>

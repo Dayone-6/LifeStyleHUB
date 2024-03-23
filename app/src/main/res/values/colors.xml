@@ -19,6 +19,8 @@
     <color name="skeleton_color">#777777</color>
     <color name="surface_background">#bbbbbb</color>
     <color name="surface_light_background">#dddddd</color>
+    <color name="text_good">#76FF03</color>
+    <color name="text_bad">#FF1744</color>
 
 
 </resources>

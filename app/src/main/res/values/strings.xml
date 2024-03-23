@@ -29,6 +29,10 @@
     <string name="text_there_is_no_places">There are no places around you</string>
     <string name="text_paging_load">Load more data</string>
     <string name="text_paging_end">Thit is all</string>
+    <string name="text_like_people">People who likes this place</string>
+    <string name="text_contacts">Contacts</string>
+    <string name="text_url">URL</string>
+    <string name="text_phone">Phone number</string>
 
     <string name="error_empty_field">This field must not be empty</string>
     <string name="error_login_already_exists">This login already exists! Choose another one</string>

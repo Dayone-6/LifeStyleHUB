@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ru.dayone.lifestylehub.databinding.ActivityMainBinding
-import ru.dayone.lifestylehub.prefs.AppPrefs
+import ru.dayone.lifestylehub.data.local.AppPrefs
 import ru.dayone.lifestylehub.utils.LOCATION_PERMISSION_REQUEST_CODE
 
 class MainActivity : AppCompatActivity() {
