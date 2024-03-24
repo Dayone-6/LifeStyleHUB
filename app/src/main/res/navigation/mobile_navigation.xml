@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ru.dayone.lifestylehub.ui.home.main.HomeFragment"
+        android:name="ru.dayone.lifestylehub.ui.home.HomeFragment"
         android:label="@string/title_nav_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,10 +16,17 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_my_activity"
-        android:name="ru.dayone.lifestylehub.ui.my_activity.MyActivityFragment"
-        android:label="@string/title_nav_my_activity"
-        tools:layout="@layout/fragment_my_activity" />
+        android:id="@+id/navigation_leisure"
+        android:name="ru.dayone.lifestylehub.ui.leisure.all.LeisureFragment"
+        android:label="@string/title_nav_leisure"
+        tools:layout="@layout/fragment_leisure" >
+        <action
+            android:id="@+id/action_all_leisure_to_add_leisure"
+            app:destination="@id/addLeisureFragment" />
+        <action
+            android:id="@+id/action_navigation_leisure_to_leisureDetailsFragment"
+            app:destination="@id/leisureDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_login"
@@ -57,7 +64,25 @@
     </fragment>
     <fragment
         android:id="@+id/placeDetailsFragment"
-        android:name="ru.dayone.lifestylehub.ui.home.venue_details.PlaceDetailsFragment"
+        android:name="ru.dayone.lifestylehub.ui.venue_details.PlaceDetailsFragment"
         android:label="fragment_place_details"
-        tools:layout="@layout/fragment_place_details" />
+        tools:layout="@layout/fragment_place_details" >
+        <action
+            android:id="@+id/action_placeDetailsFragment_to_addLeisureFragment"
+            app:destination="@id/addLeisureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLeisureFragment"
+        android:name="ru.dayone.lifestylehub.ui.leisure.add.AddLeisureFragment"
+        android:label="fragment_add_leisure"
+        tools:layout="@layout/fragment_add_leisure" />
+    <fragment
+        android:id="@+id/leisureDetailsFragment"
+        android:name="ru.dayone.lifestylehub.ui.leisure.details.LeisureDetailsFragment"
+        android:label="fragment_leisure_details"
+        tools:layout="@layout/fragment_leisure_details" >
+        <action
+            android:id="@+id/action_leisureDetailsFragment_to_placeDetailsFragment"
+            app:destination="@id/placeDetailsFragment" />
+    </fragment>
 </navigation>

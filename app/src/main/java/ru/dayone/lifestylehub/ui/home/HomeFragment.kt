@@ -1,4 +1,4 @@
-package ru.dayone.lifestylehub.ui.home.main
+package ru.dayone.lifestylehub.ui.home
 
 import android.location.Location
 import android.os.Bundle

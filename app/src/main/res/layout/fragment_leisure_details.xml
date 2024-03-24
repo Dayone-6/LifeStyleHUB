@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.leisure.details.LeisureDetailsFragment" >
+
+    <TextView
+        android:id="@+id/tv_leisure_details_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textAlignment="center"
+        android:textColor="@color/on_background_text"
+        android:textSize="@dimen/title_text_size" />
+
+    <TextView
+        android:id="@+id/tv_leisure_details_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/on_background_text"
+        android:textSize="18sp" />
+
+    <CalendarView
+        android:id="@+id/calendar_leisure_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false" />
+
+    <Button
+        android:id="@+id/btn_to_place_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/text_to_place_details"
+        android:textColor="@color/btn_text"
+        app:cornerRadius="15dp" />
+</LinearLayout>

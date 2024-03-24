@@ -22,7 +22,7 @@ import com.bumptech.glide.request.target.Target
 import com.faltenreich.skeletonlayout.createSkeleton
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.data.local.AppPrefs
-import ru.dayone.lifestylehub.ui.home.main.HomeViewModel
+import ru.dayone.lifestylehub.ui.home.HomeViewModel
 import ru.dayone.lifestylehub.utils.FeedItem
 import ru.dayone.lifestylehub.utils.FeedItemType
 import ru.dayone.lifestylehub.utils.PAGINATION_LIMIT

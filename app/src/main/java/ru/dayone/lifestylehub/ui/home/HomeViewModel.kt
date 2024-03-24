@@ -1,4 +1,4 @@
-package ru.dayone.lifestylehub.ui.home.main
+package ru.dayone.lifestylehub.ui.home
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -120,16 +120,14 @@ class HomeViewModel(
                         val formattedPlaces = ArrayList<FormattedPlaceModel>()
                         for (result in response.body()!!.response.group.results) {
                             try {
-                                Log.d("Data", result.place.location.fullAddress.toString())
+                                Log.d("Data", result.photo.toString())
                                 formattedPlaces.add(
                                     FormattedPlaceModel(
                                         id = result.place.id,
                                         name = result.place.name,
                                         address = result.place.location.fullAddress.joinToString(),
                                         categories = result.place.categories.map { it.name },
-                                        photoUrl = result.photo.urlPrefix + "1000x400/" + result.photo.urlSuffix.substring(
-                                            1
-                                        ),
+                                        photoUrl = result.photo.urlPrefix + "1000x400/" + result.photo.urlSuffix!!.substring(1),
                                         allCount = response.body()!!.response.group.totalCount
                                     )
                                 )
@@ -137,6 +135,7 @@ class HomeViewModel(
                                 e.printStackTrace()
                             }
                         }
+                        Log.d("PlacesGet", "get")
                         _placesStatus.postValue(PlacesStatus.Succeed(formattedPlaces))
                     }catch (e: Exception){
                         e.printStackTrace()

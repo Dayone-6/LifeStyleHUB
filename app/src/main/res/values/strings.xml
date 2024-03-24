@@ -2,11 +2,13 @@
     <string name="app_name" translatable="false">LifestyleHUB</string>
 
     <string name="title_nav_home">Home</string>
-    <string name="title_nav_my_activity">My Activity</string>
+    <string name="title_nav_leisure">Leisure</string>
     <string name="title_nav_account">Account</string>
     <string name="title_registration">Registration</string>
     <string name="title_login">Authorization</string>
     <string name="title_account_info">Account Info</string>
+    <string name="title_new_leisure">New Leisure</string>
+
 
     <string name="hint_login">Login*</string>
     <string name="hint_password">Password*</string>
@@ -14,6 +16,8 @@
     <string name="hint_surname">Surname*</string>
     <string name="hint_age">Age</string>
     <string name="hint_email">Email</string>
+    <string name="hint_leisure_title">Title*</string>
+    <string name="hint_leisure_notes">Notes</string>
 
     <string name="text_registrate">Registrate</string>
     <string name="text_login">Authorize</string>
@@ -34,6 +38,9 @@
     <string name="text_url">URL</string>
     <string name="text_phone">Phone number</string>
     <string name="text_mock">abc</string>
+    <string name="text_add_leisure">Add Leisure</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_to_place_details">To place</string>
 
     <string name="error_empty_field">This field must not be empty</string>
     <string name="error_login_already_exists">This login already exists! Choose another one</string>
@@ -44,4 +51,6 @@
     <string name="message_get_random_user_failed">Get random user data failed!</string>
     <string name="message_get_user_failed">Get user data failed!</string>
     <string name="message_get_location_failed">Get location failed</string>
+    <string name="message_confirm">Are you sure?</string>
+    <string name="message_confirm_delete_leisure">"Do you really want to delete leisure with name "</string>
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_main"
+    android:orientation="vertical"
+    tools:context=".ui.leisure.all.LeisureFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_leisure"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        tools:listitem="@layout/item_leisure" />
+
+    <Button
+        android:id="@+id/btn_all_leisure_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        android:drawableEnd="@drawable/ic_pen_plus"
+        android:drawableTint="@color/btn_text"
+        android:text="@string/text_add_leisure"
+        android:textColor="@color/btn_text"
+        app:cornerRadius="20dp" />
+</FrameLayout>

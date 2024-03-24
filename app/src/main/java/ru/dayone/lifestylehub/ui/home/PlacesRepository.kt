@@ -1,4 +1,4 @@
-package ru.dayone.lifestylehub.ui.home.main
+package ru.dayone.lifestylehub.ui.home
 
 import retrofit2.Call
 import retrofit2.Retrofit

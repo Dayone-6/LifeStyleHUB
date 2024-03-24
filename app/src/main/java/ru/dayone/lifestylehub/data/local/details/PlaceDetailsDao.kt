@@ -10,9 +10,9 @@ interface PlaceDetailsDao {
     @Query("SELECT * FROM place_details WHERE id = :id")
     fun getPlaceById(id: String): PlaceDetailsEntity?
 
-    @Delete
-    fun deletePlace(place: PlaceDetailsEntity)
+    @Query("DELETE FROM place_details WHERE id = :id")
+    fun deletePlace(id: String)
 
-    @Insert
+    @Insert(entity = PlaceDetailsEntity::class)
     fun addPlaceDetails(place: PlaceDetailsEntity)
 }

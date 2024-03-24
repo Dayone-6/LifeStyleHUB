@@ -1,149 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.venue_details.PlaceDetailsFragment">
+    tools:context=".ui.venue_details.PlaceDetailsFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/iv_details_main_photo"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="@string/text_mock" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_details_photos"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:itemCount="1" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_details_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/inter_semi_bold"
-        android:textAlignment="center"
-        android:textColor="@color/on_background_text"
-        android:textSize="22sp" />
+            <ImageView
+                android:id="@+id/iv_details_main_photo"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:contentDescription="@string/text_mock"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tv_details_adress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/on_background_text"
-        android:textSize="18sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_details_photos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1" />
+        </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_details_categories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_category">
+        <TextView
+            android:id="@+id/tv_details_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textAlignment="center"
+            android:textColor="@color/on_background_text"
+            android:textSize="22sp" />
 
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/tv_details_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/text_bad"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:text="@string/text_contacts"
-        android:textAlignment="textEnd"
-        android:textColor="@color/on_background_text"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:id="@+id/ll_contacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_details_adress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/on_background_text"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tv_details_phone_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="@string/text_phone"
-                android:textColor="@color/on_background_text"
-                android:textSize="18sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_details_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_category">
 
-            <TextView
-                android:id="@+id/tv_details_url_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/text_url"
-                android:textColor="@color/on_background_text"
-                android:textSize="18sp" />
-        </LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_details_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_bad"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="@string/text_contacts"
+            android:textAlignment="textEnd"
+            android:textColor="@color/on_background_text"
+            android:textSize="18sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:id="@+id/ll_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_details_phone"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:textColor="@color/on_background_text"
-                android:textSize="18sp" />
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_details_url"
+                <TextView
+                    android:id="@+id/tv_details_phone_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/text_phone"
+                    android:textColor="@color/on_background_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_url_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_url"
+                    android:textColor="@color/on_background_text"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_semi_bold"
-                android:textAlignment="textEnd"
-                android:textColor="@color/on_background_text"
-                android:textSize="16sp" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_details_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:textColor="@color/on_background_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_details_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/on_background_text"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_details_likes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/on_background_text"
+            android:textSize="18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_details_leisure"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/btn_details_add_leisure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:drawableLeft="@drawable/ic_pen_plus"
+            android:drawableTint="@color/btn_text"
+            android:text="@string/text_add_leisure"
+            android:textColor="@color/btn_text"
+            app:cornerRadius="20dp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_details_likes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/on_background_text"
-        android:textSize="18sp" />
 
-</LinearLayout>
+
+</ScrollView>

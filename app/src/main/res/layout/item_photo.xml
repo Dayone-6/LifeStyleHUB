@@ -11,5 +11,6 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/text_mock"/>
 </LinearLayout>

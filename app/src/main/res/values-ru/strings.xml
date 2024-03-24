@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_nav_home">Главная</string>
-    <string name="title_nav_my_activity">Мой Досуг</string>
+    <string name="title_nav_leisure">Мой Досуг</string>
     <string name="title_nav_account">Профиль</string>
     <string name="title_registration">Регистарция</string>
     <string name="title_login">Вход</string>
@@ -39,5 +39,13 @@
     <string name="text_url">Ссылка</string>
     <string name="text_phone">Номер телефона</string>
     <string name="text_mock">abc</string>
+    <string name="hint_leisure_title">Название*</string>
+    <string name="hint_leisure_notes">Заметки</string>
+    <string name="title_new_leisure">Новый досуг</string>
+    <string name="text_add_leisure">Добавить досуг</string>
+    <string name="text_yes">Да</string>
+    <string name="message_confirm">Вы уверены?</string>
+    <string name="message_confirm_delete_leisure">Вы точно хотите удалить досуг с названием</string>
+    <string name="text_to_place_details">Перейти к месту</string>
 
 </resources>

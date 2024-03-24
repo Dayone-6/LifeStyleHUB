@@ -21,6 +21,7 @@
     <color name="surface_light_background">#dddddd</color>
     <color name="text_good">#76FF03</color>
     <color name="text_bad">#FF1744</color>
+    <color name="background_leisure">#00B0FF</color>
 
 
 </resources>

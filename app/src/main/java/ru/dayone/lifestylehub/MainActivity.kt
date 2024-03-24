@@ -2,15 +2,19 @@ package ru.dayone.lifestylehub
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import ru.dayone.lifestylehub.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dayone.lifestylehub.data.local.AppPrefs
+import ru.dayone.lifestylehub.databinding.ActivityMainBinding
 import ru.dayone.lifestylehub.utils.LOCATION_PERMISSION_REQUEST_CODE
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +38,10 @@ class MainActivity : AppCompatActivity() {
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
                     as NavHostFragment).navController
 
+        binding.navView.setOnItemSelectedListener {
+            binding.navView.selectedItemId = it.itemId
+            onNavDestinationSelected(it, navController)
+        }
         if (locationPermission){
             navView.setupWithNavController(navController)
         }

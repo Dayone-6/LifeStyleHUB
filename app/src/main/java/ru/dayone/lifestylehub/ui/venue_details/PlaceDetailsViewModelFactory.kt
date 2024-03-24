@@ -1,4 +1,4 @@
-package ru.dayone.lifestylehub.ui.home.venue_details
+package ru.dayone.lifestylehub.ui.venue_details
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

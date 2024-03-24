@@ -1,6 +1,7 @@
-package ru.dayone.lifestylehub.ui.home.venue_details
+package ru.dayone.lifestylehub.ui.venue_details
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,31 +17,58 @@ import ru.dayone.lifestylehub.data.remote.places.model.PhotoData
 import ru.dayone.lifestylehub.utils.CACHE_RELEVANCE_TIME
 import ru.dayone.lifestylehub.utils.FailureCode
 import ru.dayone.lifestylehub.utils.MAIN_DELIMITER
+import ru.dayone.lifestylehub.utils.status.LeisureStatus
 import ru.dayone.lifestylehub.utils.status.PlaceDetailsStatus
 
 class PlaceDetailsViewModel(
     context: Context
 ) : ViewModel() {
     private val repository = PlaceDetailsRepository(context)
+    private val leisureRepository = DetailsLeisureRepository(context)
+
+    private val _leisureStatus: MutableLiveData<LeisureStatus> = MutableLiveData()
+    val leisureStatus: LiveData<LeisureStatus> = _leisureStatus
 
     private val _status: MutableLiveData<PlaceDetailsStatus> = MutableLiveData()
     val status: LiveData<PlaceDetailsStatus> = _status
 
     private var details: PlaceDetailsEntity? = null
 
+    fun getLeisure(placeId: String){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                _leisureStatus.postValue(LeisureStatus.Succeed(leisureRepository.getLeisureByPlaceId(placeId)))
+            }catch (e: Exception){
+                _leisureStatus.postValue(LeisureStatus.Failed())
+            }
+        }
+    }
+
+    fun deleteLeisure(id: Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                leisureRepository.deleteLeisure(id)
+            }catch (e: Exception){
+                _leisureStatus.postValue(LeisureStatus.Failed())
+            }
+        }
+    }
     fun getDetails(id: String, token: String, date: String, apiKey: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val localData = repository.getLocalDetails(id)
                 if (localData == null) {
+                    Log.d("DetailsRequest", "REQUEST!!!")
                     invokeGetRemoteDetails(id, token, date)
                     invokeGetPhotos(id, apiKey)
                 } else {
                     if ((localData.gotTime - System.currentTimeMillis()) >= CACHE_RELEVANCE_TIME) {
-                        repository.deleteDetails(localData)
+                        repository.deleteDetails(localData.id)
+                        Log.d("DetailsRequest", "REQUEST!!!")
                         invokeGetRemoteDetails(id, token, date)
                         invokeGetPhotos(id, apiKey)
                     } else {
+                        Log.d("DetailsRequest", "LOCAL!!!")
                         _status.postValue(PlaceDetailsStatus.Succeed(localData))
                     }
                 }
@@ -68,10 +96,10 @@ class PlaceDetailsViewModel(
                             details = PlaceDetailsEntity(
                                 id,
                                 data.name,
-                                data.mainPhoto.urlPrefix,
+                                data.mainPhoto!!.urlPrefix,
                                 data.mainPhoto.urlSuffix,
-                                data.location.fullAddress.joinToString(),
-                                (data.category.map { it.name }).joinToString(separator = MAIN_DELIMITER),
+                                data.location!!.fullAddress.joinToString(),
+                                (data.category!!.map { it.name }).joinToString(separator = MAIN_DELIMITER),
                                 data.url ?: "",
                                 if (data.likes != null) {
                                     data.likes.count
@@ -99,10 +127,10 @@ class PlaceDetailsViewModel(
                             details = PlaceDetailsEntity(
                                 id,
                                 data.name,
-                                data.mainPhoto.urlPrefix,
+                                data.mainPhoto!!.urlPrefix,
                                 data.mainPhoto.urlSuffix + MAIN_DELIMITER + details!!.suffixes,
-                                data.location.fullAddress.joinToString(),
-                                (data.category.map { it.name }).joinToString(separator = MAIN_DELIMITER),
+                                data.location!!.fullAddress.joinToString(),
+                                (data.category!!.map { it.name }).joinToString(separator = MAIN_DELIMITER),
                                 data.url ?: "",
                                 if (data.likes != null) {
                                     data.likes.count
@@ -126,7 +154,11 @@ class PlaceDetailsViewModel(
                                 },
                                 System.currentTimeMillis()
                             )
+                            CoroutineScope(Dispatchers.IO).launch {
+                                repository.addDetails(details!!)
+                            }
                             _status.postValue(PlaceDetailsStatus.Succeed(details!!))
+                            details = null
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -151,7 +183,10 @@ class PlaceDetailsViewModel(
             ) {
                 try {
                     val urls =
-                        response.body()!!.joinToString(separator = MAIN_DELIMITER) { it.urlSuffix }
+                        response.body()!!.joinToString(separator = MAIN_DELIMITER) { it.urlSuffix!! }
+                    if(response.body()!!.isEmpty()){
+                        return
+                    }
                     if (details == null) {
                         details = PlaceDetailsEntity(
                             "",
@@ -168,8 +203,18 @@ class PlaceDetailsViewModel(
                             0
                         )
                     } else {
+                        Log.d("Null Check", details!!.toString())
                         details!!.suffixes = details!!.suffixes + MAIN_DELIMITER + urls
                         _status.postValue(PlaceDetailsStatus.Succeed(details!!))
+                        CoroutineScope(Dispatchers.Default).launch {
+                            try {
+                                repository.addDetails(details!!)
+                            }catch (e: Exception){
+                                e.printStackTrace()
+                            }
+                        }
+                        details = null
+
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

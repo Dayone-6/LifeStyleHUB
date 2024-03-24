@@ -1,6 +1,7 @@
-package ru.dayone.lifestylehub.ui.home.venue_details
+package ru.dayone.lifestylehub.ui.venue_details
 
 import android.content.Context
+import android.telecom.Call.Details
 import retrofit2.Call
 import retrofit2.Retrofit
 import ru.dayone.lifestylehub.data.local.details.PlaceDetailsDatabase
@@ -23,6 +24,9 @@ class PlaceDetailsRepository(
         return detailsDao.getPlaceById(id)
     }
 
+    fun addDetails(details: PlaceDetailsEntity){
+        detailsDao.addPlaceDetails(details)
+    }
     fun getRemoteDetails(id: String, date: String, token: String): Call<DetailsResponseModel>{
         return detailsService.getDetails(id, date, token)
     }
@@ -31,7 +35,7 @@ class PlaceDetailsRepository(
         return detailsService.getPhotos(id, token)
     }
 
-    fun deleteDetails(details: PlaceDetailsEntity){
-        detailsDao.deletePlace(details)
+    fun deleteDetails(id: String){
+        detailsDao.deletePlace(id)
     }
 }
