@@ -29,7 +29,7 @@ class AccountInfoViewModel(
             try {
                 val user = repository.getUserByLogin(login)
                 if (user != null) {
-                    _user.postValue(user!!)
+                    _user.postValue(user)
                     _status.postValue(Status.Success(SuccessCode.DEFAULT))
                 }else{
                     _status.postValue(Status.Failure(FailureCode.DEFAULT))

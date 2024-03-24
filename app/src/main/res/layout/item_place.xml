@@ -18,7 +18,8 @@
         <ImageView
             android:id="@+id/iv_place_photo"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="150dp"
+            android:contentDescription="@string/text_mock"/>
 
         <TextView
             android:id="@+id/tv_place_name"
@@ -26,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/inter_semi_bold"
-            android:text="Place name"
             android:textAlignment="center"
             android:textColor="@color/on_background_text"
             android:textSize="24sp" />
@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:text="Place address"
             android:textColor="@color/on_background_text"
             android:textSize="18sp" />
 

@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.dayone.lifestylehub.account.local_data.UsersDatabase
 
 @Database(entities = [PlaceDetailsEntity::class], version = 1)
 abstract class PlaceDetailsDatabase : RoomDatabase() {

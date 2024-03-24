@@ -1,6 +1,5 @@
 package ru.dayone.lifestylehub.data.remote.places.details.model
 
-import android.provider.ContactsContract.CommonDataKinds.Phone
 import com.google.gson.annotations.SerializedName
 
 data class DetailsContact(

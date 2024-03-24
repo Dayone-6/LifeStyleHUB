@@ -212,6 +212,7 @@ class HomeFragment : Fragment() {
             weather.mainData.temperatureMax.roundToInt()
         )
         binding.viewWeather.setType(weather.type[0].name)
+        binding.viewWeather.setCity(city!!)
 
         isWeatherLoaded = true
         binding.viewWeather.endLoading()
