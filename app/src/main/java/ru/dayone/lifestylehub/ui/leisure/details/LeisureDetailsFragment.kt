@@ -21,7 +21,7 @@ class LeisureDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLeisureDetailsBinding.inflate(inflater, container, false)
 
         requireArguments().apply {
@@ -29,8 +29,9 @@ class LeisureDetailsFragment : Fragment() {
             notes = getString("notes")!!
             date = getLong("date")
             placeId = getString("placeId")
+
         }
-        if(placeId == null){
+        if(placeId == ""){
             binding.btnToPlaceDetails.visibility = View.GONE
         }else{
             binding.tvLeisureDetailsNotes.visibility = View.GONE
@@ -42,7 +43,8 @@ class LeisureDetailsFragment : Fragment() {
         binding.btnToPlaceDetails.setOnClickListener {
             val b = Bundle()
             b.putString("id", placeId)
-            findNavController().navigate(R.id.action_leisureDetailsFragment_to_placeDetailsFragment, b)
+            b.putInt("from", R.layout.fragment_leisure_details)
+            findNavController().navigate(R.id.action_leisure_to_place, b)
         }
 
         return binding.root

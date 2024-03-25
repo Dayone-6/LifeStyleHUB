@@ -77,7 +77,15 @@ class HomeFragment : Fragment() {
             feedItems!!,
             requireContext(),
             homeViewModel,
-            findNavController()
+            object : FeedAdapter.OnItemClick{
+                override fun onClick(item: FeedItem.Place) {
+                    val bundle = Bundle()
+                    bundle.putString("id", item.place.id)
+                    bundle.putInt("from", R.layout.fragment_home)
+                    findNavController().navigate(R.id.action_navigation_home_to_placeDetailsFragment, bundle)
+                }
+
+            }
         )
         binding.rvPlaces.adapter = feedAdapter
         binding.rvPlaces.layoutManager = LinearLayoutManager(requireContext())

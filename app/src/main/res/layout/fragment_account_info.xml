@@ -114,6 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/hint_email"
@@ -142,6 +143,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginBottom="30dp"
         android:text="@string/text_log_out"
+        android:textColor="@color/btn_text"
         app:cornerRadius="@dimen/btn_corner_radius" />
 
     <LinearLayout

@@ -2,13 +2,10 @@ package ru.dayone.lifestylehub
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dayone.lifestylehub.data.local.AppPrefs
@@ -38,13 +35,7 @@ class MainActivity : AppCompatActivity() {
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
                     as NavHostFragment).navController
 
-        binding.navView.setOnItemSelectedListener {
-            binding.navView.selectedItemId = it.itemId
-            onNavDestinationSelected(it, navController)
-        }
-        if (locationPermission){
-            navView.setupWithNavController(navController)
-        }
+        navView.setupWithNavController(navController)
     }
 
     override fun onRequestPermissionsResult(
@@ -54,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE){
-            binding.navView.setupWithNavController(navController)
             AppPrefs.setIsLocationPermissionGranted(grantResults.all { it == PackageManager.PERMISSION_GRANTED })
         }
     }

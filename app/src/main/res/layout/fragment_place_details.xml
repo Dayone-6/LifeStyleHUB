@@ -9,8 +9,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -154,7 +155,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_details_leisure"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="200dp"
+            tools:itemCount="4">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -165,7 +167,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:drawableLeft="@drawable/ic_pen_plus"
+            android:drawableEnd="@drawable/ic_pen_plus"
             android:drawableTint="@color/btn_text"
             android:text="@string/text_add_leisure"
             android:textColor="@color/btn_text"

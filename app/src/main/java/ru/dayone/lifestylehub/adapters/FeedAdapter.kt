@@ -2,7 +2,6 @@ package ru.dayone.lifestylehub.adapters
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -33,8 +31,12 @@ class FeedAdapter(
     private var feedItems: List<FeedItem>,
     private val context: Context,
     private val viewModel: HomeViewModel,
-    private val navController: NavController
+    private val onItemClick: OnItemClick
 ) : RecyclerView.Adapter<ViewHolder>() {
+
+    interface OnItemClick{
+        fun onClick(item: FeedItem.Place)
+    }
 
     private class DefaultViewHolder(view: View) : ViewHolder(view)
     private class PlaceViewHolder(view: View) : ViewHolder(view) {
@@ -159,22 +161,10 @@ class FeedAdapter(
         holder.rvCategories.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         holder.cvPlaceRoot.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("id", feedItem.place.id)
-            navController.navigate(R.id.action_navigation_home_to_placeDetailsFragment, bundle)
+            onItemClick.onClick(feedItem)
         }
 
     }
-
-//    fun extendData(newData: List<FeedItem>) {
-//        val extendedData = feedItems.toMutableList()
-//        extendedData.removeLast()
-//        extendedData.addAll(extendedData.size, newData)
-//        extendedData.add(FeedItem.PagingControl())
-//        feedItems = extendedData.toList()
-//        Log.d("PlacesDataEXtend", feedItems.size.toString())
-//        notifyItemRangeChanged(0, feedItems.size)
-//    }
 
     fun replaceData(data: List<FeedItem>){
         feedItems = data

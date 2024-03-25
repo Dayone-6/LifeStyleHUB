@@ -57,7 +57,7 @@ class PlaceDetailsFragment : Fragment() {
     private lateinit var leisureAdapter: LeisureAdapter
 
     private lateinit var placeId: String
-
+    private var from = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,9 +65,10 @@ class PlaceDetailsFragment : Fragment() {
         _binding = FragmentPlaceDetailsBinding.inflate(inflater, container, false)
 
         placeId = requireArguments().getString("id")!!
+        from = requireArguments().getInt("from")
 
         adapter = PlaceCategoryAdapter(listOf())
-        if(AppPrefs.getIsAuthorized()) {
+        if (AppPrefs.getIsAuthorized()) {
             leisureAdapter =
                 LeisureAdapter(mutableListOf(), object : LeisureAdapter.ActionListener {
                     override fun onDelete(item: LeisureEntity) {
@@ -92,12 +93,11 @@ class PlaceDetailsFragment : Fragment() {
             binding.rvDetailsCategories.adapter = adapter
             binding.rvDetailsCategories.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        }else{
+            binding.rvDetailsLeisure.adapter = leisureAdapter
+            binding.rvDetailsLeisure.layoutManager = LinearLayoutManager(requireContext())
+        } else {
             binding.btnDetailsAddLeisure.visibility = View.GONE
         }
-
-        binding.rvDetailsLeisure.adapter = leisureAdapter
-        binding.rvDetailsLeisure.layoutManager = LinearLayoutManager(requireContext())
 
         mainImageSkeleton = binding.ivDetailsMainPhoto.createSkeleton(AppPrefs.getSkeletonConfig())
         nameSkeleton = binding.tvDetailsName.createSkeleton(AppPrefs.getSkeletonConfig())
@@ -154,7 +154,7 @@ class PlaceDetailsFragment : Fragment() {
             }
         }
 
-        if(binding.ivDetailsMainPhoto.drawable == null) {
+        if (binding.ivDetailsMainPhoto.drawable == null) {
             viewModel.getDetails(
                 placeId,
                 PLACES_OAUTH_KEY,
@@ -166,7 +166,13 @@ class PlaceDetailsFragment : Fragment() {
         binding.btnDetailsAddLeisure.setOnClickListener {
             val b = Bundle()
             b.putString("placeId", placeId)
-            findNavController().navigate(R.id.action_placeDetailsFragment_to_addLeisureFragment, b)
+            findNavController().navigate(
+                if (from == R.layout.fragment_home) {
+                    R.id.action_place_to_add_leisure
+                } else {
+                    R.id.action_leisure_place_to_add_leisure
+                }, b
+            )
         }
 
         return binding.root
@@ -174,7 +180,7 @@ class PlaceDetailsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if(AppPrefs.getIsAuthorized()) {
+        if (AppPrefs.getIsAuthorized()) {
             viewModel.getLeisure(AppPrefs.getAuthorizedUserLogin(), placeId)
         }
     }
@@ -185,7 +191,7 @@ class PlaceDetailsFragment : Fragment() {
     }
 
     private fun onGetDetailsSucceed(details: PlaceDetailsEntity) {
-        if(details.suffixes != null) {
+        if (details.suffixes != null) {
             photoUrls = details.suffixes!!.split(MAIN_DELIMITER) as ArrayList<String>
         }
         Glide
@@ -249,12 +255,12 @@ class PlaceDetailsFragment : Fragment() {
             binding.tvDetailsUrlTitle.visibility = View.GONE
         }
 
-        if(details.categories != null) {
+        if (details.categories != null) {
             Log.d("data", details.categories.split(MAIN_DELIMITER).toString())
             adapter.replaceData(details.categories.split(MAIN_DELIMITER))
         }
 
-        if(details.suffixes != null) {
+        if (details.suffixes != null) {
             val suffixes = details.suffixes!!.split(MAIN_DELIMITER)
             binding.rvDetailsPhotos.adapter = PlacePhotosAdapter(
                 suffixes.subList(2, suffixes.size),
