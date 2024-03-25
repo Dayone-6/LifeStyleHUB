@@ -154,11 +154,15 @@ class PlaceDetailsViewModel(
                                 },
                                 System.currentTimeMillis()
                             )
-                            CoroutineScope(Dispatchers.IO).launch {
-                                repository.addDetails(details!!)
-                            }
                             _status.postValue(PlaceDetailsStatus.Succeed(details!!))
-                            details = null
+                            CoroutineScope(Dispatchers.IO).launch {
+                                try {
+                                    repository.addDetails(details!!)
+                                    details = null
+                                }catch (e: Exception){
+                                    e.printStackTrace()
+                                }
+                            }
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -206,14 +210,14 @@ class PlaceDetailsViewModel(
                         Log.d("Null Check", details!!.toString())
                         details!!.suffixes = details!!.suffixes + MAIN_DELIMITER + urls
                         _status.postValue(PlaceDetailsStatus.Succeed(details!!))
-                        CoroutineScope(Dispatchers.Default).launch {
+                        CoroutineScope(Dispatchers.IO).launch {
                             try {
                                 repository.addDetails(details!!)
+                                details = null
                             }catch (e: Exception){
                                 e.printStackTrace()
                             }
                         }
-                        details = null
 
                     }
                 } catch (e: Exception) {

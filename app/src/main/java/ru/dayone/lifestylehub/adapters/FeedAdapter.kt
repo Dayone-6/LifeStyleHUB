@@ -23,12 +23,11 @@ import com.faltenreich.skeletonlayout.createSkeleton
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.data.local.AppPrefs
 import ru.dayone.lifestylehub.ui.home.HomeViewModel
+import ru.dayone.lifestylehub.utils.DATE_KEY
 import ru.dayone.lifestylehub.utils.FeedItem
 import ru.dayone.lifestylehub.utils.FeedItemType
 import ru.dayone.lifestylehub.utils.PAGINATION_LIMIT
 import ru.dayone.lifestylehub.utils.PLACES_OAUTH_KEY
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class FeedAdapter(
     private var feedItems: List<FeedItem>,
@@ -100,6 +99,7 @@ class FeedAdapter(
         holder.tvLoadMore.visibility = View.VISIBLE
         holder.progress.visibility = View.GONE
         holder.tvEnd.visibility = View.GONE
+
         if ((feedItems[0] as FeedItem.Place).place.allCount > feedItems.size) {
             holder.tvLoadMore.setOnClickListener {
                 holder.progress.visibility = View.VISIBLE
@@ -108,7 +108,7 @@ class FeedAdapter(
                 viewModel.getPlaces(
                     PLACES_OAUTH_KEY,
                     "${location!!.latitude},${location.longitude}",
-                    LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")),
+                    DATE_KEY,
                     PAGINATION_LIMIT,
                     feedItems.size - 1
                 )
@@ -166,12 +166,18 @@ class FeedAdapter(
 
     }
 
-    fun extendData(newData: List<FeedItem>) {
-        val extendedData = feedItems.toMutableList()
-        extendedData.removeLast()
-        extendedData.addAll(extendedData.size, newData)
-        extendedData.add(FeedItem.PagingControl())
-        feedItems = extendedData.toList()
-        notifyItemRangeInserted(feedItems.size - 1 - newData.size, newData.size)
+//    fun extendData(newData: List<FeedItem>) {
+//        val extendedData = feedItems.toMutableList()
+//        extendedData.removeLast()
+//        extendedData.addAll(extendedData.size, newData)
+//        extendedData.add(FeedItem.PagingControl())
+//        feedItems = extendedData.toList()
+//        Log.d("PlacesDataEXtend", feedItems.size.toString())
+//        notifyItemRangeChanged(0, feedItems.size)
+//    }
+
+    fun replaceData(data: List<FeedItem>){
+        feedItems = data
+        notifyItemRangeChanged(0, data.size)
     }
 }

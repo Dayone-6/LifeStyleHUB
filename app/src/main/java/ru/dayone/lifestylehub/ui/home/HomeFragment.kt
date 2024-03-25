@@ -2,6 +2,7 @@ package ru.dayone.lifestylehub.ui.home
 
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,30 +49,83 @@ class HomeFragment : Fragment() {
 
     private lateinit var feedAdapter: FeedAdapter
 
+    companion object {
+        private var feedItems: MutableList<FeedItem>? = null
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        homeViewModel = ViewModelProvider(
+            this,
+            HomeViewModelFactory(requireContext())
+        )[HomeViewModel::class.java]
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homeViewModel = ViewModelProvider(
-            this,
-            HomeViewModelFactory(requireContext())
-        )[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        if(feedItems == null){
+            feedItems = mutableListOf(FeedItem.PagingControl())
+        }
+
+        feedAdapter = FeedAdapter(
+            feedItems!!,
+            requireContext(),
+            homeViewModel,
+            findNavController()
+        )
+        binding.rvPlaces.adapter = feedAdapter
+        binding.rvPlaces.layoutManager = LinearLayoutManager(requireContext())
+
+        homeViewModel.weatherStatus.observe(viewLifecycleOwner){
+            when(it){
+                is WeatherStatus.Success -> {
+                    setUpWeather(it.weather)
+                }
+                is WeatherStatus.Failure -> {
+                    when(it.failCode) {
+                        FailureCode.GET_WEATHER_FAILED -> { weatherNotAvailable(getString(R.string.message_failed)) }
+                        else -> {}
+                    }
+                }
+            }
+        }
+
+        homeViewModel.placesStatus.observe(viewLifecycleOwner){
+            when(it){
+                is PlacesStatus.Succeed -> {
+                    onGetPlacesSucceed(it.placesResponseModel)
+                }
+                is PlacesStatus.Failed -> {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.message_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
 
         homeViewModel.locationStatus.observe(viewLifecycleOwner){
             when(it){
                 is LocationStatus.Success -> {
-                    location = it.location
-                    city = it.city
-                    if(AppPrefs.getIsAuthorized()) {
-                        getWeather()
-                    }else{
-                        weatherNotAvailable(getString(R.string.text_weather_available_with_account))
+                    if(location == null) {
+                        location = it.location
+                        city = it.city
+                        if (AppPrefs.getIsAuthorized()) {
+                            getWeather()
+                        } else {
+                            weatherNotAvailable(getString(R.string.text_weather_available_with_account))
+                        }
+                        AppPrefs.setLocation(location!!)
+                        Log.d("GetLocation", "!!!")
+                        getPlaces()
                     }
-                    AppPrefs.setLocation(location!!)
-                    getPlaces()
                 }
                 is LocationStatus.Failure -> {
                     binding.homeRefresh.isRefreshing = false
@@ -97,43 +151,16 @@ class HomeFragment : Fragment() {
             }
         }
 
-        feedAdapter = FeedAdapter(listOf(FeedItem.PagingControl()), requireContext(), homeViewModel, findNavController())
-        binding.rvPlaces.adapter = feedAdapter
-        binding.rvPlaces.layoutManager = LinearLayoutManager(requireContext())
-
-        startPlacesUiLoading()
-        startWeatherUiLoading()
-        homeViewModel.getLocation()
+        if(location == null) {
+            startPlacesUiLoading()
+            startWeatherUiLoading()
+            Log.d("GetLocationFromMain", "!!!")
+            location = null
+            homeViewModel.getLocation()
+        }
 
         if(!AppPrefs.getIsAuthorized()){
             weatherNotAvailable(getString(R.string.text_weather_available_with_account))
-        }
-
-        homeViewModel.weatherStatus.observe(viewLifecycleOwner){
-            when(it){
-                is WeatherStatus.Success -> {
-                    setUpWeather(it.weather)
-                }
-                is WeatherStatus.Failure -> {
-                    when(it.failCode) {
-                        FailureCode.GET_WEATHER_FAILED -> { weatherNotAvailable(getString(R.string.message_failed)) }
-                        else -> {}
-                    }
-                }
-            }
-        }
-
-        homeViewModel.placesStatus.observe(viewLifecycleOwner){
-            when(it){
-                is PlacesStatus.Succeed -> { onGetPlacesSucceed(it.placesResponseModel) }
-                is PlacesStatus.Failed -> {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.message_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
         }
 
         binding.homeRefresh.setOnRefreshListener {
@@ -141,9 +168,12 @@ class HomeFragment : Fragment() {
                 binding.homeRefresh.isRefreshing = false
                 return@setOnRefreshListener
             }
-            feedAdapter = FeedAdapter(listOf(FeedItem.PagingControl()), requireContext(), homeViewModel, findNavController())
+            feedItems = mutableListOf(FeedItem.PagingControl())
+            feedAdapter.replaceData(feedItems!!)
             startPlacesUiLoading()
             startWeatherUiLoading()
+            Log.d("GetLocationFromRefresh", "!!!")
+            location = null
             homeViewModel.getLocation()
         }
 
@@ -151,8 +181,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun onGetPlacesSucceed(places: List<FormattedPlaceModel>){
+        Log.d("onGetPlacesSucceed", "${places.size} ${feedAdapter.itemCount}")
         val lastPosition = binding.rvPlaces.layoutManager!!.onSaveInstanceState()!!
-        feedAdapter.extendData(places.map { FeedItem.Place(it) })
+        feedItems!!.removeLast()
+        val placesInItems = getPlacesInFeed()
+        for(item in places){
+            if(item.id !in placesInItems.map { it.place.id }){
+                feedItems!!.add(FeedItem.Place(item))
+            }
+        }
+        feedItems!!.add(FeedItem.PagingControl())
+        feedAdapter.replaceData(feedItems!!)
         isPlacesLoaded = true
         placesSkeleton.showOriginal()
         if(isWeatherLoaded){
@@ -161,6 +200,9 @@ class HomeFragment : Fragment() {
         binding.rvPlaces.layoutManager!!.onRestoreInstanceState(lastPosition)
     }
 
+    private fun getPlacesInFeed(): List<FeedItem.Place>{
+        return feedItems!!.mapNotNull { if(it is FeedItem.Place){it}else{null} }
+    }
     private fun getWeather(){
         homeViewModel.getWeather(
             WEATHER_API_KEY,

@@ -74,4 +74,8 @@ dependencies {
     //Glide
     implementation (libs.glide)
 
+    //FusedLocation
+    implementation (libs.play.services.location)
+
+
 }
