@@ -34,10 +34,10 @@ class PlaceDetailsViewModel(
 
     private var details: PlaceDetailsEntity? = null
 
-    fun getLeisure(placeId: String){
+    fun getLeisure(userLogin: String, placeId: String){
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                _leisureStatus.postValue(LeisureStatus.Succeed(leisureRepository.getLeisureByPlaceId(placeId)))
+                _leisureStatus.postValue(LeisureStatus.Succeed(leisureRepository.getLeisureByPlaceId(userLogin, placeId)))
             }catch (e: Exception){
                 _leisureStatus.postValue(LeisureStatus.Failed())
             }

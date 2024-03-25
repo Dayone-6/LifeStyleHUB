@@ -47,5 +47,6 @@
     <string name="message_confirm">Вы уверены?</string>
     <string name="message_confirm_delete_leisure">Вы точно хотите удалить досуг с названием</string>
     <string name="text_to_place_details">Перейти к месту</string>
+    <string name="text_log_out">Выйти из аккаунта</string>
 
 </resources>

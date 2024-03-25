@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -133,13 +134,24 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_log_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/text_log_out"
+        app:cornerRadius="@dimen/btn_corner_radius" />
+
     <LinearLayout
         android:id="@+id/ll_account_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#66000000"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <ProgressBar
             style="?android:attr/progressBarStyle"

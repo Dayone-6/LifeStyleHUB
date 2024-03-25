@@ -67,30 +67,34 @@ class PlaceDetailsFragment : Fragment() {
         placeId = requireArguments().getString("id")!!
 
         adapter = PlaceCategoryAdapter(listOf())
-        leisureAdapter =
-            LeisureAdapter(mutableListOf(), object : LeisureAdapter.ActionListener {
-                override fun onDelete(item: LeisureEntity) {
-                    Snackbar.make(
-                        requireContext(),
-                        requireView(),
-                        getString(R.string.message_confirm),
-                        Snackbar.LENGTH_SHORT
-                    ).setText(
-                        getString(R.string.message_confirm_delete_leisure) + item.title + "?"
-                    ).setAction(getString(R.string.text_yes)) {
-                        viewModel.deleteLeisure(item.id)
-                        leisureAdapter.deleteItem(item.id)
-                    }.show()
-                }
+        if(AppPrefs.getIsAuthorized()) {
+            leisureAdapter =
+                LeisureAdapter(mutableListOf(), object : LeisureAdapter.ActionListener {
+                    override fun onDelete(item: LeisureEntity) {
+                        Snackbar.make(
+                            requireContext(),
+                            requireView(),
+                            getString(R.string.message_confirm),
+                            Snackbar.LENGTH_SHORT
+                        ).setText(
+                            getString(R.string.message_confirm_delete_leisure) + item.title + "?"
+                        ).setAction(getString(R.string.text_yes)) {
+                            viewModel.deleteLeisure(item.id)
+                            leisureAdapter.deleteItem(item.id)
+                        }.show()
+                    }
 
-                override fun onItemClick(item: LeisureEntity) {
+                    override fun onItemClick(item: LeisureEntity) {
 
-                }
-            })
+                    }
+                })
 
-        binding.rvDetailsCategories.adapter = adapter
-        binding.rvDetailsCategories.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            binding.rvDetailsCategories.adapter = adapter
+            binding.rvDetailsCategories.layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        }else{
+            binding.btnDetailsAddLeisure.visibility = View.GONE
+        }
 
         binding.rvDetailsLeisure.adapter = leisureAdapter
         binding.rvDetailsLeisure.layoutManager = LinearLayoutManager(requireContext())
@@ -151,7 +155,6 @@ class PlaceDetailsFragment : Fragment() {
         }
 
         if(binding.ivDetailsMainPhoto.drawable == null) {
-
             viewModel.getDetails(
                 placeId,
                 PLACES_OAUTH_KEY,
@@ -171,7 +174,9 @@ class PlaceDetailsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getLeisure(placeId)
+        if(AppPrefs.getIsAuthorized()) {
+            viewModel.getLeisure(AppPrefs.getAuthorizedUserLogin(), placeId)
+        }
     }
 
     private fun onLeisureSucceed(leisure: List<LeisureEntity>) {

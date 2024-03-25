@@ -14,8 +14,8 @@ class LeisureRepository(
         leisureDao.addLeisure(leisure)
     }
 
-    fun getAllLeisure(): List<LeisureEntity>{
-        return leisureDao.getAllLeisure()
+    fun getAllLeisure(userLogin: String): List<LeisureEntity>{
+        return leisureDao.getAllLeisure(userLogin)
     }
 
     fun deleteLeisure(id: Int){

@@ -105,8 +105,13 @@ class LeisureFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        skeleton.showSkeleton()
-        leisureViewModel.getAllLeisure()
+        if(AppPrefs.getIsAuthorized()) {
+            skeleton.showSkeleton()
+            leisureViewModel.getAllLeisure(AppPrefs.getAuthorizedUserLogin())
+        }else{
+            binding.rvLeisure.visibility = View.GONE
+            binding.btnAllLeisureAdd.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

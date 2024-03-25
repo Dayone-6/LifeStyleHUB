@@ -57,6 +57,11 @@ class AccountInfoFragment : Fragment() {
 
         viewModel.getUserByLogin(authLogin)
 
+        binding.btnLogOut.setOnClickListener {
+            AppPrefs.setIsAuthorized(false)
+            AppPrefs.setAuthorizedUserLogin("")
+            findNavController().navigate(R.id.action_accountInfoFragment_to_navigation_login)
+        }
         return binding.root
     }
 

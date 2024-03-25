@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import ru.dayone.lifestylehub.R
+import ru.dayone.lifestylehub.data.local.AppPrefs
 import ru.dayone.lifestylehub.data.local.leisure.LeisureEntity
 import ru.dayone.lifestylehub.databinding.FragmentAddLeisureBinding
 import ru.dayone.lifestylehub.utils.status.Status
@@ -62,6 +63,7 @@ class AddLeisureFragment : Fragment() {
             }else{
                 viewModel.addLeisure(LeisureEntity(
                     0,
+                    AppPrefs.getAuthorizedUserLogin(),
                     binding.etLeisureTitle.text.toString(),
                     selectedDate,
                     binding.etLeisureNotes.text.toString(),

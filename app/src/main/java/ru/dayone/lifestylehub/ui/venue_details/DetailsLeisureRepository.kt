@@ -14,7 +14,7 @@ class DetailsLeisureRepository(
         leisureDao.deleteLeisure(id)
     }
 
-    fun getLeisureByPlaceId(placeId: String): List<LeisureEntity>{
-        return leisureDao.getLeisureByPLaceId(placeId)
+    fun getLeisureByPlaceId(userLogin: String, placeId: String): List<LeisureEntity>{
+        return leisureDao.getLeisureByPLaceId(userLogin, placeId)
     }
 }
