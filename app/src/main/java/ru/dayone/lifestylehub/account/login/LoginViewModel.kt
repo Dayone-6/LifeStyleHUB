@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.dayone.lifestylehub.account.local_data.entity.User
+import ru.dayone.lifestylehub.account.local_data.User
 import ru.dayone.lifestylehub.account.utils.AccountFailureCode
 import ru.dayone.lifestylehub.account.utils.AccountStatus
 import ru.dayone.lifestylehub.account.utils.AccountSuccessCode
@@ -33,6 +33,7 @@ class LoginViewModel(
                 if(user != null){
                     val passwordHash = userPassword.hashCode()
                     if(user.password == passwordHash){
+                        // этот варнинг не убирается, если его убрать, начинает как ошибку показывать
                         _loginUser.postValue(user!!)
                         _accountStatus.postValue(AccountStatus.Succeed(AccountSuccessCode.LOGIN_SUCCEED))
                     }else{

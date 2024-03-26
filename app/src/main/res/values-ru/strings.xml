@@ -55,7 +55,7 @@
     <string name="text_add_leisure">Добавить досуг</string>
     <string name="text_yes">Да</string>
     <string name="message_confirm">Вы уверены?</string>
-    <string name="message_confirm_delete_leisure">Вы точно хотите удалить досуг с названием</string>
+    <string name="message_confirm_delete_leisure">"Вы точно хотите удалить досуг с названием "</string>
     <string name="text_to_place_details">Перейти к месту</string>
     <string name="text_log_out">Выйти из аккаунта</string>
     <string name="text_save_changings">Сохранить изменения</string>
@@ -79,5 +79,6 @@
     <string name="title_activity">Занятия</string>
     <string name="message_no_activity">Нет занятия с такими параметрами</string>
     <string name="text_login_to_use_leisure">Войдите в аккаунт,\nчтобы использовать досуг</string>
+    <string name="message_network_unavailable">Включите интернет</string>
 
 </resources>

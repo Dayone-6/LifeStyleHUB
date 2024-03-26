@@ -40,7 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:fontFamily="@font/inter_medium" />
+            android:fontFamily="@font/inter_medium"
+            android:autofillHints=""
+            android:inputType="text"
+            tools:ignore="LabelFor"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,13 +64,16 @@
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium" />
+            android:fontFamily="@font/inter_medium"
+            android:autofillHints=""
+            android:inputType="numberPassword"
+            tools:ignore="LabelFor"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:fontFamily="@font/inter_regular"
         android:text="@string/text_marked_notice"
         android:textColor="@color/gray_text"
@@ -76,7 +82,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
@@ -92,7 +98,7 @@
             android:id="@+id/tv_to_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:text="@string/title_registration"
             android:textColor="@color/primary"
             android:textSize="14sp" />

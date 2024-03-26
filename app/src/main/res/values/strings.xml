@@ -84,6 +84,7 @@
     <string name="message_you_must_be_auth">You must be authorized to do this</string>
     <string name="message_check_fields">Check if you fill the fields in settings correctly</string>
     <string name="message_no_activity">There is no activity to these settings</string>
+    <string name="message_network_unavailable">Turn on the internet</string>
 
 
 </resources>

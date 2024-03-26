@@ -3,10 +3,14 @@ package ru.dayone.lifestylehub.data.local
 import android.content.Context
 import android.content.SharedPreferences
 import android.location.Location
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import com.faltenreich.skeletonlayout.SkeletonConfig
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.utils.AUTH_USER_KEY
 import ru.dayone.lifestylehub.utils.IS_AUTHORIZED_KEY
+
 
 object AppPrefs {
     private lateinit var prefs: SharedPreferences
@@ -72,5 +76,23 @@ object AppPrefs {
     }
 
     fun getLocation() = location
+
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val activeNetwork: Network? = connectivityManager.activeNetwork
+        val capabilities: NetworkCapabilities? =
+            connectivityManager.getNetworkCapabilities(activeNetwork)
+
+        if (capabilities != null) {
+            return if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) true else if (capabilities.hasTransport(
+                    NetworkCapabilities.TRANSPORT_CELLULAR
+                )
+            ) true else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) true else false
+        }
+        return false
+    }
 
 }

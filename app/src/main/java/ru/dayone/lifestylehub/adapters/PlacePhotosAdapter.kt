@@ -64,10 +64,5 @@ class PlacePhotosAdapter(
                 }
 
             }).into(holder.image)
-        holder.image.setOnClickListener {
-            if(!skeleton.isSkeleton()){
-
-            }
-        }
     }
 }

@@ -1,4 +1,4 @@
-package ru.dayone.lifestylehub.account.local_data.entity
+package ru.dayone.lifestylehub.account.local_data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

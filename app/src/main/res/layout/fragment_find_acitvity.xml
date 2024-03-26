@@ -41,17 +41,30 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_find_activity"
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/text_find_activity"
-            android:textColor="@color/btn_text"
-            app:cornerRadius="@dimen/btn_corner_radius"
-            tools:ignore="ButtonStyle" />
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_find_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:enabled="true"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/text_find_activity"
+                android:textColor="@color/btn_text"
+                app:cornerRadius="@dimen/btn_corner_radius"
+                tools:ignore="ButtonStyle" />
+
+            <ProgressBar
+                android:id="@+id/pb_activity"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <Button
             android:id="@+id/btn_settings"
@@ -76,6 +89,7 @@
         android:id="@+id/cb_only_favourite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/inter_semi_bold"
         android:text="@string/text_only_favourite"

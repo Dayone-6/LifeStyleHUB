@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.dayone.lifestylehub.account.local_data.entity.User
+import ru.dayone.lifestylehub.account.local_data.User
 import ru.dayone.lifestylehub.utils.FailureCode
 import ru.dayone.lifestylehub.utils.status.Status
 import ru.dayone.lifestylehub.utils.SuccessCode
@@ -29,6 +29,7 @@ class AccountInfoViewModel(
             try {
                 val user = repository.getUserByLogin(login)
                 if (user != null) {
+                    // если убрать !! начинает красным подсвечивать
                     _user.postValue(user!!)
                     _status.postValue(Status.Success(SuccessCode.DEFAULT))
                 }else{

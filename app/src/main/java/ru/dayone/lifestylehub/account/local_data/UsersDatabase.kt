@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.dayone.lifestylehub.account.local_data.dao.UsersDao
-import ru.dayone.lifestylehub.account.local_data.entity.User
 
 @Database(entities = [User::class], version = 1)
 abstract class UsersDatabase : RoomDatabase(){

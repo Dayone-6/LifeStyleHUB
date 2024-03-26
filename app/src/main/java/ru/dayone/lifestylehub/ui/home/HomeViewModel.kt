@@ -141,6 +141,7 @@ class HomeViewModel(
                 }
             } else {
                 CoroutineScope(Dispatchers.IO).launch {
+                    // этот метод нужен для получения локации в версиях андроида < tiramisu
                     val address =
                         geocoder.getFromLocation(location.latitude, location.longitude, 1)
                     withContext(Dispatchers.Main) {

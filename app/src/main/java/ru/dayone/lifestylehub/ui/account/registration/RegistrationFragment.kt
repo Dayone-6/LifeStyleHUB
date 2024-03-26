@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.dayone.lifestylehub.R
-import ru.dayone.lifestylehub.account.local_data.entity.User
+import ru.dayone.lifestylehub.account.local_data.User
 import ru.dayone.lifestylehub.account.registiration.RegistrationViewModel
 import ru.dayone.lifestylehub.account.registiration.RegistrationViewModelFactory
 import ru.dayone.lifestylehub.databinding.FragmentRegistrationBinding

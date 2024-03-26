@@ -4,13 +4,11 @@ import android.content.Context
 import android.util.Log
 import org.json.JSONArray
 import ru.dayone.lifestylehub.account.local_data.UsersDatabase
-import ru.dayone.lifestylehub.account.local_data.dao.UsersDao
-import ru.dayone.lifestylehub.account.local_data.entity.User
+import ru.dayone.lifestylehub.account.local_data.UsersDao
+import ru.dayone.lifestylehub.account.local_data.User
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
-import java.net.MalformedURLException
 import java.net.URL
 import kotlin.random.Random
 
@@ -65,7 +63,7 @@ class RegistrationRepository(
         return buffer.toString()
     }
 
-    fun getRandomUser(): User{
+    fun getRandomUser(): User {
         val json = getUsersJson()
 
         val userJson = JSONArray(json).getJSONObject(0)

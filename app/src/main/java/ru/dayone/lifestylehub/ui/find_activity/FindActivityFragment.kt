@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.adapters.ActivityAdapter
+import ru.dayone.lifestylehub.data.local.AppPrefs
 import ru.dayone.lifestylehub.data.local.activity.ActivityEntity
 import ru.dayone.lifestylehub.databinding.FragmentFindAcitvityBinding
 import ru.dayone.lifestylehub.utils.FailureCode
@@ -94,69 +95,79 @@ class FindActivityFragment : Fragment() {
         }
 
         binding.btnFindActivity.setOnClickListener {
-            val type: String? = when (binding.spActivityType.selectedItem.toString()) {
-                getString(R.string.text_type_busywork) -> "busywork"
-                getString(R.string.text_type_mucic) -> "music"
-                getString(R.string.text_type_cooking) -> "cooking"
-                getString(R.string.text_type_diy) -> "diy"
-                getString(R.string.text_type_charity) -> "charity"
-                getString(R.string.text_type_relaxation) -> "relaxation"
-                getString(R.string.text_type_social) -> "social"
-                getString(R.string.text_type_recre) -> "recreational"
-                getString(R.string.text_type_educ) -> "education"
-                getString(R.string.text_type_any) -> null
-                else -> {null}
-            }
-            try {
-                viewModel.getRemoteActivity(
-                    null,
-                    type,
-                    if (participants.isEmpty()) {
+            if(AppPrefs.isNetworkAvailable(requireContext())) {
+                binding.btnFindActivity.isEnabled = false
+                binding.pbActivity.visibility = View.VISIBLE
+                val type: String? = when (binding.spActivityType.selectedItem.toString()) {
+                    getString(R.string.text_type_busywork) -> "busywork"
+                    getString(R.string.text_type_mucic) -> "music"
+                    getString(R.string.text_type_cooking) -> "cooking"
+                    getString(R.string.text_type_diy) -> "diy"
+                    getString(R.string.text_type_charity) -> "charity"
+                    getString(R.string.text_type_relaxation) -> "relaxation"
+                    getString(R.string.text_type_social) -> "social"
+                    getString(R.string.text_type_recre) -> "recreational"
+                    getString(R.string.text_type_educ) -> "education"
+                    getString(R.string.text_type_any) -> null
+                    else -> {
                         null
-                    } else {
-                        participants.toInt()
-                    },
-                    if (minPrice.isEmpty()) {
-                        null
-                    } else {
-                        minPrice.toDouble()
-                    },
-                    if (maxPrice.isEmpty()) {
-                        null
-                    } else {
-                        maxPrice.toDouble()
-                    },
-                    if (exactPrice.isEmpty()) {
-                        null
-                    } else {
-                        exactPrice.toDouble()
-                    },
-                    if (exactAccessibility.isEmpty()) {
-                        null
-                    } else {
-                        exactAccessibility.toDouble()
-                    },
-                    if (minAccessibility.isEmpty()) {
-                        null
-                    } else {
-                        minAccessibility.toDouble()
-                    },
-                    if (maxAccessibility.isEmpty()) {
-                        null
-                    } else {
-                        maxAccessibility.toDouble()
                     }
-                )
-            } catch (e: NumberFormatException) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.message_check_fields),
-                    Toast.LENGTH_SHORT
-                ).show()
+                }
+                try {
+                    viewModel.getRemoteActivity(
+                        null,
+                        type,
+                        if (participants.isEmpty()) {
+                            null
+                        } else {
+                            participants.toInt()
+                        },
+                        if (minPrice.isEmpty()) {
+                            null
+                        } else {
+                            minPrice.toDouble()
+                        },
+                        if (maxPrice.isEmpty()) {
+                            null
+                        } else {
+                            maxPrice.toDouble()
+                        },
+                        if (exactPrice.isEmpty()) {
+                            null
+                        } else {
+                            exactPrice.toDouble()
+                        },
+                        if (exactAccessibility.isEmpty()) {
+                            null
+                        } else {
+                            exactAccessibility.toDouble()
+                        },
+                        if (minAccessibility.isEmpty()) {
+                            null
+                        } else {
+                            minAccessibility.toDouble()
+                        },
+                        if (maxAccessibility.isEmpty()) {
+                            null
+                        } else {
+                            maxAccessibility.toDouble()
+                        }
+                    )
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.message_check_fields),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }else{
+                showToastNetworkNotAvailable()
             }
         }
 
         viewModel.remoteStatus.observe(viewLifecycleOwner) {
+            binding.btnFindActivity.isEnabled = true
+            binding.pbActivity.visibility = View.GONE
             when (it) {
                 is ActivityStatus.Remote.Succeed -> {
                     onRemoteSucceed(it.activity)
@@ -184,7 +195,7 @@ class FindActivityFragment : Fragment() {
             }
         }
 
-        binding.cbOnlyFavourite.setOnClickListener {v ->
+        binding.cbOnlyFavourite.setOnClickListener {
             if(binding.cbOnlyFavourite.isChecked){
                 adapter.replaceData(adapter.getData().filter { it.isFavourite }.toMutableList())
             }else{
@@ -199,6 +210,14 @@ class FindActivityFragment : Fragment() {
         adapter.addActivity(activity)
         binding.rvActivities.scrollToPosition(0)
         viewModel.saveActivity(activity)
+    }
+
+    private fun showToastNetworkNotAvailable() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.message_network_unavailable),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun onRemoteFailed() {

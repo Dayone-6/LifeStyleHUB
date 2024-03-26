@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.dayone.lifestylehub.account.local_data.entity.User
+import ru.dayone.lifestylehub.account.local_data.User
 import ru.dayone.lifestylehub.account.utils.AccountFailureCode
 import ru.dayone.lifestylehub.account.utils.AccountStatus
 import ru.dayone.lifestylehub.account.utils.AccountSuccessCode

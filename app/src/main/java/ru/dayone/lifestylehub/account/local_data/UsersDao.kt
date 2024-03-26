@@ -1,11 +1,10 @@
-package ru.dayone.lifestylehub.account.local_data.dao
+package ru.dayone.lifestylehub.account.local_data
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import ru.dayone.lifestylehub.account.local_data.entity.User
 
 @Dao
 interface UsersDao {

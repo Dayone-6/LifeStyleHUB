@@ -2,8 +2,8 @@ package ru.dayone.lifestylehub.account.login
 
 import android.content.Context
 import ru.dayone.lifestylehub.account.local_data.UsersDatabase
-import ru.dayone.lifestylehub.account.local_data.dao.UsersDao
-import ru.dayone.lifestylehub.account.local_data.entity.User
+import ru.dayone.lifestylehub.account.local_data.UsersDao
+import ru.dayone.lifestylehub.account.local_data.User
 
 class LoginRepository(
     context: Context

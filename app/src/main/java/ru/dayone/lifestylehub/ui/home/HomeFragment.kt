@@ -15,18 +15,18 @@ import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.adapters.FeedAdapter
-import ru.dayone.lifestylehub.databinding.FragmentHomeBinding
-import ru.dayone.lifestylehub.model.FormattedPlaceModel
 import ru.dayone.lifestylehub.data.local.AppPrefs
 import ru.dayone.lifestylehub.data.remote.weather.model.WeatherModel
+import ru.dayone.lifestylehub.databinding.FragmentHomeBinding
+import ru.dayone.lifestylehub.model.FormattedPlaceModel
 import ru.dayone.lifestylehub.utils.DATE_KEY
 import ru.dayone.lifestylehub.utils.FailureCode
 import ru.dayone.lifestylehub.utils.FeedItem
 import ru.dayone.lifestylehub.utils.PAGINATION_LIMIT
-import ru.dayone.lifestylehub.utils.status.LocationStatus
 import ru.dayone.lifestylehub.utils.PLACES_OAUTH_KEY
-import ru.dayone.lifestylehub.utils.status.PlacesStatus
 import ru.dayone.lifestylehub.utils.WEATHER_API_KEY
+import ru.dayone.lifestylehub.utils.status.LocationStatus
+import ru.dayone.lifestylehub.utils.status.PlacesStatus
 import ru.dayone.lifestylehub.utils.status.WeatherStatus
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -170,11 +170,15 @@ class HomeFragment : Fragment() {
         }
 
         if(location == null) {
-            startPlacesUiLoading()
-            startWeatherUiLoading()
-            Log.d("GetLocationFromMain", "!!!")
-            location = null
-            homeViewModel.getLocation()
+            if(AppPrefs.isNetworkAvailable(requireContext())) {
+                startPlacesUiLoading()
+                startWeatherUiLoading()
+                Log.d("GetLocationFromMain", "!!!")
+                location = null
+                homeViewModel.getLocation()
+            }else{
+                showToastNetworkNotAvailable()
+            }
         }
 
         if(!AppPrefs.getIsAuthorized()){
@@ -182,20 +186,35 @@ class HomeFragment : Fragment() {
         }
 
         binding.homeRefresh.setOnRefreshListener {
-            if(!isPlacesLoaded || !isWeatherLoaded){
+            if(AppPrefs.isNetworkAvailable(requireContext())) {
+                if (!isPlacesLoaded || !isWeatherLoaded) {
+                    binding.homeRefresh.isRefreshing = false
+                    return@setOnRefreshListener
+                }
+                feedItems = mutableListOf(FeedItem.PagingControl())
+                feedAdapter.replaceData(feedItems!!)
+                startPlacesUiLoading()
+                startWeatherUiLoading()
+                Log.d("GetLocationFromRefresh", "!!!")
+                location = null
+                homeViewModel.getLocation()
+            }else{
+                isPlacesLoaded = true
+                isWeatherLoaded = true
                 binding.homeRefresh.isRefreshing = false
-                return@setOnRefreshListener
+                showToastNetworkNotAvailable()
             }
-            feedItems = mutableListOf(FeedItem.PagingControl())
-            feedAdapter.replaceData(feedItems!!)
-            startPlacesUiLoading()
-            startWeatherUiLoading()
-            Log.d("GetLocationFromRefresh", "!!!")
-            location = null
-            homeViewModel.getLocation()
         }
 
         return binding.root
+    }
+
+    private fun showToastNetworkNotAvailable() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.message_network_unavailable),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun onGetPlacesSucceed(places: List<FormattedPlaceModel>){
@@ -290,7 +309,6 @@ class HomeFragment : Fragment() {
             text = message
         }
         isPlacesLoaded = true
-
     }
 
     override fun onDestroyView() {
