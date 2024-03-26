@@ -69,6 +69,7 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
         if(feedItems == null){
             feedItems = mutableListOf(FeedItem.PagingControl())
         }
@@ -89,6 +90,12 @@ class HomeFragment : Fragment() {
         )
         binding.rvPlaces.adapter = feedAdapter
         binding.rvPlaces.layoutManager = LinearLayoutManager(requireContext())
+
+        placesSkeleton = binding.rvPlaces.applySkeleton(
+            R.layout.item_place,
+            PAGINATION_LIMIT,
+            AppPrefs.getSkeletonConfig()
+        )
 
         homeViewModel.weatherStatus.observe(viewLifecycleOwner){
             when(it){
@@ -245,11 +252,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun startPlacesUiLoading(){
-        placesSkeleton = binding.rvPlaces.applySkeleton(
-            R.layout.item_place,
-            PAGINATION_LIMIT,
-            AppPrefs.getSkeletonConfig()
-        )
         binding.tvPlacesMessage.visibility = View.GONE
         binding.rvPlaces.visibility = View.VISIBLE
         placesSkeleton.showSkeleton()
