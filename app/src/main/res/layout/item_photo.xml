@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/text_mock"
         android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/backgrounds/scenic"
-        android:contentDescription="@string/text_mock"/>
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </LinearLayout>

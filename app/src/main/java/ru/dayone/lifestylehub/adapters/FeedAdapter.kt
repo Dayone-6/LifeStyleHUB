@@ -26,6 +26,7 @@ import ru.dayone.lifestylehub.utils.FeedItem
 import ru.dayone.lifestylehub.utils.FeedItemType
 import ru.dayone.lifestylehub.utils.PAGINATION_LIMIT
 import ru.dayone.lifestylehub.utils.PLACES_OAUTH_KEY
+import java.lang.ClassCastException
 
 class FeedAdapter(
     private var feedItems: List<FeedItem>,
@@ -101,24 +102,29 @@ class FeedAdapter(
         holder.tvLoadMore.visibility = View.VISIBLE
         holder.progress.visibility = View.GONE
         holder.tvEnd.visibility = View.GONE
-
-        if ((feedItems[0] as FeedItem.Place).place.allCount > feedItems.size) {
-            holder.tvLoadMore.setOnClickListener {
-                holder.progress.visibility = View.VISIBLE
+        try {
+            if ((feedItems[0] as FeedItem.Place).place.allCount > feedItems.size) {
+                holder.tvLoadMore.setOnClickListener {
+                    holder.progress.visibility = View.VISIBLE
+                    holder.tvLoadMore.visibility = View.GONE
+                    val location = AppPrefs.getLocation()
+                    viewModel.getPlaces(
+                        PLACES_OAUTH_KEY,
+                        "${location!!.latitude},${location.longitude}",
+                        DATE_KEY,
+                        PAGINATION_LIMIT,
+                        feedItems.size - 1
+                    )
+                }
+            } else {
                 holder.tvLoadMore.visibility = View.GONE
-                val location = AppPrefs.getLocation()
-                viewModel.getPlaces(
-                    PLACES_OAUTH_KEY,
-                    "${location!!.latitude},${location.longitude}",
-                    DATE_KEY,
-                    PAGINATION_LIMIT,
-                    feedItems.size - 1
-                )
+                holder.progress.visibility = View.GONE
+                holder.tvEnd.visibility = View.VISIBLE
             }
-        } else {
+        }catch (ignored: ClassCastException){
             holder.tvLoadMore.visibility = View.GONE
             holder.progress.visibility = View.GONE
-            holder.tvEnd.visibility = View.VISIBLE
+            holder.tvEnd.visibility = View.GONE
         }
     }
 

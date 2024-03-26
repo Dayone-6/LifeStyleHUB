@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.dayone.lifestylehub.data.local.details.PlaceDetailsEntity
-import ru.dayone.lifestylehub.data.remote.places.details.model.DetailsResponseModel
+import ru.dayone.lifestylehub.data.remote.place_details.model.DetailsResponseModel
 import ru.dayone.lifestylehub.data.remote.places.model.PhotoData
 import ru.dayone.lifestylehub.utils.CACHE_RELEVANCE_TIME
 import ru.dayone.lifestylehub.utils.FailureCode

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="types">
+        <item>@string/text_type_any</item>
+        <item>@string/text_type_busywork</item>
+        <item>@string/text_type_charity</item>
+        <item>@string/text_type_cooking</item>
+        <item>@string/text_type_diy</item>
+        <item>@string/text_type_educ</item>
+        <item>@string/text_type_mucic</item>
+        <item>@string/text_type_recre</item>
+        <item>@string/text_type_relaxation</item>
+        <item>@string/text_type_social</item>
+    </string-array>
+</resources>

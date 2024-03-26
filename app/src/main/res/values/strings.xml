@@ -8,7 +8,11 @@
     <string name="title_login">Authorization</string>
     <string name="title_account_info">Account Info</string>
     <string name="title_new_leisure">New Leisure</string>
-
+    <string name="title_activity_price">Price</string>
+    <string name="title_activity_accessibility">Accessibility</string>
+    <string name="title_activity_type">Type</string>
+    <string name="title_activity_participants">Partiсipants</string>
+    <string name="title_activity">Activity</string>
 
     <string name="hint_login">Login*</string>
     <string name="hint_password">Password*</string>
@@ -18,6 +22,12 @@
     <string name="hint_email">Email</string>
     <string name="hint_leisure_title">Title*</string>
     <string name="hint_leisure_notes">Notes</string>
+    <string name="hint_min_price">Min price</string>
+    <string name="hint_max_price">Max price</string>
+    <string name="hint_exact_price">Exact price</string>
+    <string name="hint_min_accessibility">Min accessibility</string>
+    <string name="hint_max_accessibility">Max accessibility</string>
+    <string name="hint_exact_accessibility">Exact accessibility</string>
 
     <string name="text_registrate">Registrate</string>
     <string name="text_login">Authorize</string>
@@ -42,11 +52,28 @@
     <string name="text_yes">Yes</string>
     <string name="text_to_place_details">To place</string>
     <string name="text_log_out">Log out</string>
+    <string name="text_save_changings">Save changings</string>
+    <string name="text_settings">Settings</string>
+    <string name="text_find_activity">Find activity</string>
+    <string name="text_only_favourite">Show only favourite</string>
+    <string name="text_activity_settings">All off the input fields apart from Participants (it\'s integer) are decimals from 0 to 1 inclusive. These are some coefficients which are describing what answer will be</string>
+    <string name="text_type_educ">Educational</string>
+    <string name="text_type_recre">Recreational</string>
+    <string name="text_type_social">Social</string>
+    <string name="text_type_diy">Diy</string>
+    <string name="text_type_charity">Charity</string>
+    <string name="text_type_cooking">Cooking</string>
+    <string name="text_type_relaxation">Relaxation</string>
+    <string name="text_type_mucic">Music</string>
+    <string name="text_type_busywork">Busy work</string>
+    <string name="text_type_any">Any</string>
+    <string name="text_login_to_use_leisure">Log in to an accoun\nto use leisure</string>
 
     <string name="error_empty_field">This field must not be empty</string>
     <string name="error_login_already_exists">This login already exists! Choose another one</string>
     <string name="error_login_not_exists">Login not exists, you can registrate</string>
     <string name="error_bad_password">Wrong password!</string>
+    <string name="error_value_not_between_one_and_zero">Value must be between 0 and 1 inclusive</string>
 
     <string name="message_failed">Something went wrong!</string>
     <string name="message_get_random_user_failed">Get random user data failed!</string>
@@ -54,4 +81,9 @@
     <string name="message_get_location_failed">Get location failed</string>
     <string name="message_confirm">Are you sure?</string>
     <string name="message_confirm_delete_leisure">"Do you really want to delete leisure with name "</string>
+    <string name="message_you_must_be_auth">You must be authorized to do this</string>
+    <string name="message_check_fields">Check if you fill the fields in settings correctly</string>
+    <string name="message_no_activity">There is no activity to these settings</string>
+
+
 </resources>

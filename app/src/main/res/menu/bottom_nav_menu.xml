@@ -7,6 +7,11 @@
         android:title="@string/title_nav_home" />
 
     <item
+        android:id="@+id/navigation_nested_activity"
+        android:icon="@drawable/ic_creation"
+        android:title="@string/title_activity"/>
+
+    <item
         android:id="@+id/navigation_nested_leisure"
         android:icon="@drawable/ic_earth"
         android:title="@string/title_nav_leisure" />

@@ -115,6 +115,7 @@ class HomeFragment : Fragment() {
                         getString(R.string.message_failed),
                         Toast.LENGTH_SHORT
                     ).show()
+                    isPlacesLoaded = true
                 }
             }
         }
@@ -144,6 +145,8 @@ class HomeFragment : Fragment() {
                                 getString(R.string.message_failed),
                                 Toast.LENGTH_SHORT
                             ).show()
+                            isPlacesLoaded = true
+                            isWeatherLoaded = true
                         }
                         FailureCode.GET_LOCATION_PERMISSION_DENIED -> {
                             weatherNotAvailable(getString(R.string.text_access_location))
@@ -242,13 +245,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun startPlacesUiLoading(){
-        binding.tvPlacesMessage.visibility = View.GONE
-        binding.rvPlaces.visibility = View.VISIBLE
         placesSkeleton = binding.rvPlaces.applySkeleton(
             R.layout.item_place,
             PAGINATION_LIMIT,
             AppPrefs.getSkeletonConfig()
         )
+        binding.tvPlacesMessage.visibility = View.GONE
+        binding.rvPlaces.visibility = View.VISIBLE
         placesSkeleton.showSkeleton()
         isPlacesLoaded = false
     }

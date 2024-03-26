@@ -108,9 +108,13 @@ class LeisureFragment : Fragment() {
         if(AppPrefs.getIsAuthorized()) {
             skeleton.showSkeleton()
             leisureViewModel.getAllLeisure(AppPrefs.getAuthorizedUserLogin())
+            binding.tvLeisureMessage.visibility = View.GONE
+            binding.rvLeisure.visibility = View.VISIBLE
+            binding.btnAllLeisureAdd.visibility = View.VISIBLE
         }else{
             binding.rvLeisure.visibility = View.GONE
             binding.btnAllLeisureAdd.visibility = View.GONE
+            binding.tvLeisureMessage.visibility = View.VISIBLE
         }
     }
 

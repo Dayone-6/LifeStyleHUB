@@ -24,6 +24,8 @@ class LeisureDetailsFragment : Fragment() {
     ): View {
         _binding = FragmentLeisureDetailsBinding.inflate(inflater, container, false)
 
+        binding.view.setOnClickListener {  }
+
         requireArguments().apply {
             title = getString("title")!!
             notes = getString("notes")!!

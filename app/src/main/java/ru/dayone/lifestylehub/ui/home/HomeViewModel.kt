@@ -63,10 +63,15 @@ class HomeViewModel(
                     call: Call<WeatherModel>,
                     response: Response<WeatherModel>
                 ) {
-                    Log.d("Data", response.body().toString())
-                    if (response.body() != null) {
-                        _weatherStatus.postValue(WeatherStatus.Success(response.body()!!))
-                    } else {
+                    try {
+                        Log.d("Data", response.body().toString())
+                        if (response.body() != null) {
+                            _weatherStatus.postValue(WeatherStatus.Success(response.body()!!))
+                        } else {
+                            _weatherStatus.postValue(WeatherStatus.Failure(FailureCode.GET_WEATHER_FAILED))
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                         _weatherStatus.postValue(WeatherStatus.Failure(FailureCode.GET_WEATHER_FAILED))
                     }
                 }
@@ -154,53 +159,49 @@ class HomeViewModel(
     }
 
     fun getPlaces(token: String, ll: String, date: String, limit: Int, offset: Int) {
-        try {
-            placesRepository.getPlacesCall(token, ll, date, limit, offset)
-                .enqueue(object : Callback<PlacesResponseModel> {
-                    override fun onResponse(
-                        call: Call<PlacesResponseModel>,
-                        response: Response<PlacesResponseModel>
-                    ) {
-                        try {
-                            if (response.body()!!.metaData.code != 200) {
-                                _placesStatus.postValue(PlacesStatus.Failed(FailureCode.GET_PLACES_FAILED))
-                                return
-                            }
-                            val formattedPlaces = ArrayList<FormattedPlaceModel>()
-                            for (result in response.body()!!.response.group.results) {
-                                try {
-                                    Log.d("Data", result.photo.toString())
-                                    formattedPlaces.add(
-                                        FormattedPlaceModel(
-                                            id = result.place.id,
-                                            name = result.place.name,
-                                            address = result.place.location.fullAddress.joinToString(),
-                                            categories = result.place.categories.map { it.name },
-                                            photoUrl = result.photo.urlPrefix + "1000x400/" + result.photo.urlSuffix!!.substring(
-                                                1
-                                            ),
-                                            allCount = response.body()!!.response.group.totalCount
-                                        )
-                                    )
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
-                            }
-                            Log.d("PlacesGet", "get")
-                            _placesStatus.postValue(PlacesStatus.Succeed(formattedPlaces))
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            _placesStatus.postValue(PlacesStatus.Failed(FailureCode.DEFAULT))
+        placesRepository.getPlacesCall(token, ll, date, limit, offset)
+            .enqueue(object : Callback<PlacesResponseModel> {
+                override fun onResponse(
+                    call: Call<PlacesResponseModel>,
+                    response: Response<PlacesResponseModel>
+                ) {
+                    try {
+                        if (response.body()!!.metaData.code != 200) {
+                            _placesStatus.postValue(PlacesStatus.Failed(FailureCode.GET_PLACES_FAILED))
+                            return
                         }
+                        val formattedPlaces = ArrayList<FormattedPlaceModel>()
+                        for (result in response.body()!!.response.group.results) {
+                            try {
+                                Log.d("Data", result.photo.toString())
+                                formattedPlaces.add(
+                                    FormattedPlaceModel(
+                                        id = result.place.id,
+                                        name = result.place.name,
+                                        address = result.place.location.fullAddress.joinToString(),
+                                        categories = result.place.categories.map { it.name },
+                                        photoUrl = result.photo.urlPrefix + "1000x400/" + result.photo.urlSuffix!!.substring(
+                                            1
+                                        ),
+                                        allCount = response.body()!!.response.group.totalCount
+                                    )
+                                )
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                        Log.d("PlacesGet", "get")
+                        _placesStatus.postValue(PlacesStatus.Succeed(formattedPlaces))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        _placesStatus.postValue(PlacesStatus.Failed(FailureCode.DEFAULT))
                     }
+                }
 
-                    override fun onFailure(call: Call<PlacesResponseModel>, t: Throwable) {
-                        _placesStatus.postValue(PlacesStatus.Failed(FailureCode.GET_PLACES_FAILED))
-                    }
-                })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            _placesStatus.postValue(PlacesStatus.Failed(FailureCode.DEFAULT))
-        }
+                override fun onFailure(call: Call<PlacesResponseModel>, t: Throwable) {
+                    _placesStatus.postValue(PlacesStatus.Failed(FailureCode.GET_PLACES_FAILED))
+                }
+            })
+
     }
 }

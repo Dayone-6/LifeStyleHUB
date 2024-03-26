@@ -2,7 +2,7 @@ package ru.dayone.lifestylehub.ui.home
 
 import retrofit2.Call
 import retrofit2.Retrofit
-import ru.dayone.lifestylehub.data.remote.client.RetrofitClient
+import ru.dayone.lifestylehub.data.remote.RetrofitClient
 import ru.dayone.lifestylehub.data.remote.places.model.PlacesResponseModel
 import ru.dayone.lifestylehub.data.remote.places.service.PlacesService
 

@@ -27,4 +27,15 @@
         android:text="@string/text_add_leisure"
         android:textColor="@color/btn_text"
         app:cornerRadius="20dp" />
+
+    <TextView
+        android:id="@+id/tv_leisure_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="@string/text_login_to_use_leisure"
+        android:textColor="@color/on_background_text"
+        android:textSize="@dimen/title_text_size"
+        android:visibility="gone" />
 </FrameLayout>

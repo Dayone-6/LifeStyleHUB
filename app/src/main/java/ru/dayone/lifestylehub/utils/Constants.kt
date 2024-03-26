@@ -19,6 +19,8 @@ const val DATE_KEY = "20240323"
 
 const val PLACES_DETAILS_BASE_URL = "https://api.foursquare.com/"
 
+const val ACTIVITY_BASE_URL = "https://www.boredapi.com/api/"
+
 // 2 hours in millis
 const val CACHE_RELEVANCE_TIME = 2 * 60 * 60 * 1000
 

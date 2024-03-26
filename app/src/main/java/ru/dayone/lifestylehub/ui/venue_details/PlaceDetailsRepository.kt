@@ -1,14 +1,13 @@
 package ru.dayone.lifestylehub.ui.venue_details
 
 import android.content.Context
-import android.telecom.Call.Details
 import retrofit2.Call
 import retrofit2.Retrofit
 import ru.dayone.lifestylehub.data.local.details.PlaceDetailsDatabase
 import ru.dayone.lifestylehub.data.local.details.PlaceDetailsEntity
-import ru.dayone.lifestylehub.data.remote.client.RetrofitClient
-import ru.dayone.lifestylehub.data.remote.places.details.model.DetailsResponseModel
-import ru.dayone.lifestylehub.data.remote.places.details.service.PlaceDetailsService
+import ru.dayone.lifestylehub.data.remote.RetrofitClient
+import ru.dayone.lifestylehub.data.remote.place_details.model.DetailsResponseModel
+import ru.dayone.lifestylehub.data.remote.place_details.service.PlaceDetailsService
 import ru.dayone.lifestylehub.data.remote.places.model.PhotoData
 
 class PlaceDetailsRepository(

@@ -110,4 +110,28 @@
             android:label="fragment_add_leisure"
             tools:layout="@layout/fragment_add_leisure" />
     </navigation>
+    <navigation
+        android:id="@+id/navigation_nested_activity"
+        app:startDestination="@id/findActivityFragment">
+        <fragment
+            android:id="@+id/activitySettingsFragment"
+            android:name="ru.dayone.lifestylehub.ui.activity_settings.ActivitySettingsFragment"
+            android:label="fragment_activity_settings"
+            tools:layout="@layout/fragment_activity_settings">
+            <action
+                android:id="@+id/action_activitySettingsFragment_to_findActivityFragment"
+                app:destination="@id/findActivityFragment"
+                app:popUpTo="@id/activitySettingsFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/findActivityFragment"
+            android:name="ru.dayone.lifestylehub.ui.find_activity.FindActivityFragment"
+            android:label="fragment_find_acitvity"
+            tools:layout="@layout/fragment_find_acitvity">
+            <action
+                android:id="@+id/action_findActivityFragment_to_activitySettingsFragment"
+                app:destination="@id/activitySettingsFragment" />
+        </fragment>
+    </navigation>
 </navigation>
