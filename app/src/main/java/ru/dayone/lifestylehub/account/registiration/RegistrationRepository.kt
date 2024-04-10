@@ -57,9 +57,6 @@ class RegistrationRepository(
         }catch (e: Exception){
             e.printStackTrace()
         }
-
-        Log.d("Data", "test")
-
         return buffer.toString()
     }
 

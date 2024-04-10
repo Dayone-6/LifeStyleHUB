@@ -13,7 +13,7 @@
     <string name="hint_name">Имя*</string>
     <string name="hint_surname">Фамилия*</string>
     <string name="hint_age">Возвраст</string>
-    <string name="hint_email">Почта</string>
+    <string name="hint_email">Почта*</string>
     <string name="hint_min_price">Минимальная цена</string>
     <string name="hint_max_price">Максимальная цена</string>
     <string name="hint_exact_price">Точная цена</string>

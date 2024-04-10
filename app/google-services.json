@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "140249995171",
+    "project_id": "lifestylehub-abd2e",
+    "storage_bucket": "lifestylehub-abd2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140249995171:android:81925e2ec46a9159042c16",
+        "android_client_info": {
+          "package_name": "ru.dayone.lifestylehub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByPkzCMiu3dgmo7_fNPjjE9CXOZTmWZEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -27,13 +27,11 @@
             android:textSize="@dimen/title_text_size" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_registration_login"
+            android:id="@+id/input_layout_registration_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:clipToPadding="false"
-            android:hint="@string/hint_login"
-            android:padding="0dp"
+            android:hint="@string/hint_email"
             app:boxCornerRadiusBottomEnd="@dimen/input_layout_corner_radius"
             app:boxCornerRadiusBottomStart="@dimen/input_layout_corner_radius"
             app:boxCornerRadiusTopEnd="@dimen/input_layout_corner_radius"
@@ -42,13 +40,12 @@
             app:boxStrokeWidthFocused="0dp">
 
             <EditText
-                android:id="@+id/et_registration_login"
+                android:id="@+id/et_registration_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:fontFamily="@font/inter_medium"
                 android:autofillHints=""
-                android:inputType="text"
+                android:fontFamily="@font/inter_medium"
+                android:inputType="textEmailAddress"
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,29 +116,6 @@
                 android:fontFamily="@font/inter_medium"
                 android:autofillHints=""
                 android:inputType="text"
-                tools:ignore="LabelFor"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_registration_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="@string/hint_email"
-            app:boxCornerRadiusBottomEnd="@dimen/input_layout_corner_radius"
-            app:boxCornerRadiusBottomStart="@dimen/input_layout_corner_radius"
-            app:boxCornerRadiusTopEnd="@dimen/input_layout_corner_radius"
-            app:boxCornerRadiusTopStart="@dimen/input_layout_corner_radius"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp">
-
-            <EditText
-                android:id="@+id/et_registration_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium"
-                android:autofillHints=""
-                android:inputType="textEmailAddress"
                 tools:ignore="LabelFor"/>
         </com.google.android.material.textfield.TextInputLayout>
 

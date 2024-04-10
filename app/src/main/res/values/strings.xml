@@ -19,7 +19,7 @@
     <string name="hint_name">Name*</string>
     <string name="hint_surname">Surname*</string>
     <string name="hint_age">Age</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_email">Email*</string>
     <string name="hint_leisure_title">Title*</string>
     <string name="hint_leisure_notes">Notes</string>
     <string name="hint_min_price">Min price</string>

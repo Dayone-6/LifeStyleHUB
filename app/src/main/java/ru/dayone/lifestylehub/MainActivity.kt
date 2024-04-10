@@ -8,6 +8,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
+import com.google.firebase.app
+import com.google.firebase.auth.auth
 import ru.dayone.lifestylehub.data.local.AppPrefs
 import ru.dayone.lifestylehub.databinding.ActivityMainBinding
 import ru.dayone.lifestylehub.utils.LOCATION_PERMISSION_REQUEST_CODE
@@ -23,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        FirebaseApp.initializeApp(this)
 
         val locationPermission = isLocationPermissionGranted()
 
@@ -71,5 +77,4 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
 }

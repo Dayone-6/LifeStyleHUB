@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp") version "1.9.21-1.0.15"
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -76,6 +77,16 @@ dependencies {
 
     //FusedLocation
     implementation (libs.play.services.location)
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    //Auth
+    implementation("com.google.firebase:firebase-auth")
+    //Firestore
+    implementation("com.google.firebase:firebase-firestore")
+    //Analytics
+    implementation("com.google.firebase:firebase-analytics")
+
 
 
 }
