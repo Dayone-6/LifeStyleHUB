@@ -12,9 +12,7 @@ import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.account.login.LoginViewModel
 import ru.dayone.lifestylehub.account.login.LoginViewModelFactory
 import ru.dayone.lifestylehub.databinding.FragmentLoginBinding
-import ru.dayone.lifestylehub.account.utils.AccountFailureCode
 import ru.dayone.lifestylehub.account.utils.AccountStatus
-import ru.dayone.lifestylehub.data.local.AppPrefs
 
 class LoginFragment : Fragment() {
 
@@ -44,41 +42,27 @@ class LoginFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             clearErrors()
 
-            val login = binding.etLoginValue.text.toString()
+            val email = binding.etEmailValue.text.toString()
             val password = binding.etLoginPassword.text.toString()
-            if(login.isEmpty() || password.isEmpty()){
-                if(login.isEmpty()){
-                    binding.inputLayoutLoginValue.error = getString(R.string.error_empty_field)
+            if(email.isEmpty() || password.isEmpty()){
+                if(email.isEmpty()){
+                    binding.inputLayoutEmailValue.error = getString(R.string.error_empty_field)
                 }
                 if(password.isEmpty()){
                     binding.inputLayoutLoginPassword.error = getString(R.string.error_empty_field)
                 }
             }else{
-                viewModel.loginUser(login, password)
+                binding.llLoginProgress.visibility = View.VISIBLE
+                binding.llLoginProgress.setOnClickListener(null)
+                viewModel.loginUser(email, password)
             }
         }
 
-        viewModel.loginUser.observe(viewLifecycleOwner){user ->
-            AppPrefs.setAuthorizedUserLogin(user.login)
-            AppPrefs.setIsAuthorized(true)
-        }
-
         viewModel.accountStatus.observe(viewLifecycleOwner){ status ->
+            binding.llLoginProgress.visibility = View.GONE
+
             when(status){
-                is AccountStatus.Failed -> {
-                    when(status.code){
-                        AccountFailureCode.DEFAULT -> {
-                            onDefaultError()
-                        }
-                        AccountFailureCode.LOGIN_NOT_EXISTS -> {
-                            onLoginNotExistsError()
-                        }
-                        AccountFailureCode.INVALID_PASSWORD -> {
-                            onPasswordError()
-                        }
-                        else -> {}
-                    }
-                }
+                is AccountStatus.Failed -> { onLoginError(status.message) }
                 is AccountStatus.Succeed -> { onLoginSucceed() }
             }
         }
@@ -95,25 +79,17 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
-    private fun onDefaultError(){
+    private fun onLoginError(error: String){
         Toast.makeText(
             requireContext(),
-            getString(R.string.message_failed),
+            error,
             Toast.LENGTH_SHORT
         ).show()
     }
 
-    private fun onLoginNotExistsError(){
-        binding.inputLayoutLoginValue.error = getString(R.string.error_login_not_exists)
-    }
-
-    private fun onPasswordError(){
-        binding.inputLayoutLoginPassword.error = getString(R.string.error_bad_password)
-    }
-
     private fun clearErrors(){
-        binding.inputLayoutLoginValue.error = ""
-        binding.inputLayoutLoginValue.isErrorEnabled = false
+        binding.inputLayoutEmailValue.error = ""
+        binding.inputLayoutEmailValue.isErrorEnabled = false
 
         binding.inputLayoutLoginPassword.error = ""
         binding.inputLayoutLoginPassword.isErrorEnabled = false

@@ -31,31 +31,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/text_account_login"
-                    android:textColor="@color/on_background_text"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/tv_account_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/text_not_stated"
-                    android:textColor="@color/on_background_text"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -70,32 +45,6 @@
 
                 <TextView
                     android:id="@+id/tv_account_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/text_not_stated"
-                    android:textColor="@color/on_background_text"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/text_surname"
-                    android:textColor="@color/on_background_text"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/tv_account_surname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="half_transparent">#77000000</color>
+
     <color name="primary">#3D5AFE</color>
     <color name="background_main">@color/white</color>
     <color name="nav_view_background">#EFEFEF</color>

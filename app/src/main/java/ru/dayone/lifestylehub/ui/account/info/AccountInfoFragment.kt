@@ -9,16 +9,16 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.dayone.lifestylehub.R
+import ru.dayone.lifestylehub.account.model.User
 import ru.dayone.lifestylehub.databinding.FragmentAccountInfoBinding
 import ru.dayone.lifestylehub.data.local.AppPrefs
-import ru.dayone.lifestylehub.utils.status.Status
+import ru.dayone.lifestylehub.utils.status.UserInfoStatus
 
 class AccountInfoFragment : Fragment() {
 
     private var _binding: FragmentAccountInfoBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: AccountInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,55 +26,23 @@ class AccountInfoFragment : Fragment() {
     ): View {
         ViewModelProvider.Factory.from()
 
-        var authLogin = ""
         if (!AppPrefs.getIsAuthorized()){
             findNavController().navigate(R.id.action_accountInfoFragment_to_navigation_login)
-        }else{
-            authLogin = AppPrefs.getAuthorizedUserLogin()
         }
         _binding = FragmentAccountInfoBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(
-            this,
-            AccountInfoViewModelFactory(
-                requireContext()
-            )
-        )[AccountInfoViewModel::class.java]
-
-        viewModel.status.observe(viewLifecycleOwner){status ->
-            when(status){
-                is Status.Success -> { onGetUserSuccess() }
-                is Status.Failure -> { onGetUserFailed() }
-            }
+        AppPrefs.getAuthInstance().currentUser ?.apply {
+            binding.llAccountLoading.visibility = View.GONE
+            binding.tvAccountEmail.text = email
+            binding.tvAccountName.text = displayName
         }
-
-        viewModel.user.observe(viewLifecycleOwner) {user ->
-            binding.tvAccountEmail.text = user.email
-            binding.tvAccountLogin.text = user.login
-            binding.tvAccountName.text = user.name
-            binding.tvAccountSurname.text = user.surname
-        }
-
-        viewModel.getUserByLogin(authLogin)
 
         binding.btnLogOut.setOnClickListener {
             AppPrefs.setIsAuthorized(false)
-            AppPrefs.setAuthorizedUserLogin("")
+            AppPrefs.getAuthInstance().signOut()
             findNavController().navigate(R.id.action_accountInfoFragment_to_navigation_login)
         }
         return binding.root
-    }
-
-    private fun onGetUserSuccess(){
-        binding.llAccountLoading.visibility = View.GONE
-    }
-
-    private fun onGetUserFailed(){
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.message_get_user_failed),
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     override fun onDestroyView() {

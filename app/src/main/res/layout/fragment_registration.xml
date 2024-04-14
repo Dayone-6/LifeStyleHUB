@@ -96,29 +96,6 @@
                 tools:ignore="LabelFor"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_registration_surname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="@string/hint_surname"
-            app:boxCornerRadiusBottomEnd="@dimen/input_layout_corner_radius"
-            app:boxCornerRadiusBottomStart="@dimen/input_layout_corner_radius"
-            app:boxCornerRadiusTopEnd="@dimen/input_layout_corner_radius"
-            app:boxCornerRadiusTopStart="@dimen/input_layout_corner_radius"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp">
-
-            <EditText
-                android:id="@+id/et_registration_surname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium"
-                android:autofillHints=""
-                android:inputType="text"
-                tools:ignore="LabelFor"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -150,7 +127,7 @@
         android:id="@+id/ll_registration_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#77000000"
+        android:background="@color/half_transparent"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone">

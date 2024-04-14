@@ -7,8 +7,8 @@ import androidx.room.Update
 
 @Dao
 interface LeisureDao {
-    @Query("SELECT * FROM leisure WHERE userLogin = :userLogin")
-    fun getAllLeisure(userLogin: String): List<LeisureEntity>
+    @Query("SELECT * FROM leisure WHERE user_id = :userId")
+    fun getAllLeisure(userId: String): List<LeisureEntity>
 
     @Update(entity = LeisureEntity::class)
     fun updateLeisure(leisure: LeisureEntity)
@@ -16,8 +16,8 @@ interface LeisureDao {
     @Insert
     fun addLeisure(leisure: LeisureEntity)
 
-    @Query("SELECT * FROM leisure WHERE place_id = :placeId AND userLogin = :userLogin")
-    fun getLeisureByPLaceId(userLogin: String, placeId: String): List<LeisureEntity>
+    @Query("SELECT * FROM leisure WHERE place_id = :placeId AND user_id = :userId")
+    fun getLeisureByPLaceId(userId: String, placeId: String): List<LeisureEntity>
 
     @Query("DELETE FROM leisure WHERE id = :id")
     fun deleteLeisure(id: Int)

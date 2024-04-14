@@ -2,10 +2,13 @@ package ru.dayone.lifestylehub.account.registiration
 
 import android.content.Context
 import android.util.Log
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
-import ru.dayone.lifestylehub.account.local_data.UsersDatabase
-import ru.dayone.lifestylehub.account.local_data.UsersDao
-import ru.dayone.lifestylehub.account.local_data.User
+import ru.dayone.lifestylehub.account.model.User
+import ru.dayone.lifestylehub.data.local.AppPrefs
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -16,66 +19,7 @@ import kotlin.random.Random
 class RegistrationRepository(
     context: Context
 ) {
-    private val db: UsersDatabase = UsersDatabase.getUsersDatabase(context)
-    private val usersDao: UsersDao = db.usersDao()
-
-    private val apiUrl = "https://randomapi.com/api/6de6abfedb24f889e0b5f675edc50deb?fmt=raw&sole"
-
-    companion object{
-        private var users: ArrayList<User>? = null
-    }
-
-    fun getAllUsers(): List<User>{
-        return users ?: run {
-            users = usersDao.getAllUsers() as ArrayList<User>
-            users!!
-        }
-    }
-
-    fun addUser(user: User){
-        usersDao.addUser(user)
-        users = usersDao.getAllUsers() as ArrayList<User>
-    }
-
-    private fun getUsersJson(): String{
-        val connection: HttpURLConnection?
-        val reader: BufferedReader?
-
-        connection = URL(apiUrl).openConnection() as HttpURLConnection
-        connection.connect()
-
-        val stream = connection.inputStream
-        reader = BufferedReader(InputStreamReader(stream))
-        val buffer = StringBuffer()
-
-        val line: String = reader.readLine()
-        buffer.append(line + "\n")
-
-        try {
-            connection.disconnect()
-            reader.close()
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
-        return buffer.toString()
-    }
-
-    fun getRandomUser(): User {
-        val json = getUsersJson()
-
-        val userJson = JSONArray(json).getJSONObject(0)
-        val userName = userJson.getString("first")
-        val userSurname = userJson.getString("last")
-        val userEmail = userJson.getString("email")
-        val userLogin = userName + userSurname + (Random.nextFloat() * 100).toInt().toString()
-        Log.d("Data", userLogin)
-
-        return User(
-            userLogin,
-            0,
-            userName,
-            userSurname,
-            userEmail
-        )
+    fun signUpUser(user: User): Task<AuthResult>{
+        return AppPrefs.getAuthInstance().createUserWithEmailAndPassword(user.email, user.password)
     }
 }

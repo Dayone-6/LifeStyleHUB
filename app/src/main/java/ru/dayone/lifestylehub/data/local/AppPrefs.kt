@@ -7,6 +7,9 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import com.faltenreich.skeletonlayout.SkeletonConfig
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import ru.dayone.lifestylehub.R
 import ru.dayone.lifestylehub.utils.AUTH_USER_KEY
 import ru.dayone.lifestylehub.utils.IS_AUTHORIZED_KEY
@@ -26,12 +29,17 @@ object AppPrefs {
 
     private var location: Location? = null
 
+    private var authInstance: FirebaseAuth? = null
+
     fun initPrefs(context: Context, name: String){
         prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE)
         editor = prefs.edit()
 
-        isAuthorized = prefs.getBoolean(IS_AUTHORIZED_KEY, false)
         authorizedUserLogin = prefs.getString(AUTH_USER_KEY, "")!!
+
+        authInstance = Firebase.auth
+
+        isAuthorized = authInstance!!.currentUser != null
 
         val defaultSkeletonConfig = SkeletonConfig.default(context)
         skeletonConfig = SkeletonConfig(
@@ -47,9 +55,6 @@ object AppPrefs {
 
     fun setIsAuthorized(isAuthorized: Boolean){
         AppPrefs.isAuthorized = isAuthorized
-
-        editor.putBoolean(IS_AUTHORIZED_KEY, isAuthorized)
-        editor.apply()
     }
 
     fun getIsAuthorized() = isAuthorized
@@ -94,5 +99,7 @@ object AppPrefs {
         }
         return false
     }
+
+    fun getAuthInstance() = authInstance!!
 
 }

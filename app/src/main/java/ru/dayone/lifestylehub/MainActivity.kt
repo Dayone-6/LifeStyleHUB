@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         AppPrefs.initPrefs(applicationContext, "main")
         AppPrefs.setIsLocationPermissionGranted(locationPermission)
 
+        AppPrefs.getAuthInstance().useAppLanguage()
+
         val navView: BottomNavigationView = binding.navView
 
         navController =

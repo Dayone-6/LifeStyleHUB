@@ -63,7 +63,7 @@ class AddLeisureFragment : Fragment() {
             }else{
                 viewModel.addLeisure(LeisureEntity(
                     0,
-                    AppPrefs.getAuthorizedUserLogin(),
+                    AppPrefs.getAuthInstance().currentUser!!.uid,
                     binding.etLeisureTitle.text.toString(),
                     selectedDate,
                     binding.etLeisureNotes.text.toString(),
